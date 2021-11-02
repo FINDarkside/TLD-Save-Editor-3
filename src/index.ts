@@ -1,7 +1,6 @@
 import * as lzf from 'lzfjs';
 import { readFile, writeFile } from 'fs/promises';
-import { SaveRoot } from './saveType';
-import TldSave from './TldSave';
+import asd from './saveParser/tldParser';
 
 function decompressString(s: string) {
   return lzf.decompress(Buffer.from(s));
@@ -20,11 +19,8 @@ async function loadSave(path: string) {
   await writeFile('./dump.json', JSON.stringify(JSON.parse(json), null, 2));
   const saveData = JSON.parse(json);
 
-  const save = new TldSave(saveData);
-
   const globalJson = decompressString(saveData.m_Dict.global).toString();
   const global = JSON.parse(globalJson);
   //console.log(global);
 }
-
-loadSave(path);
+asd();

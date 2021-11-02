@@ -16,36 +16,40 @@ type ObjSerializedType<T extends ObjectParserArg> = {
 const textEncoder = new TextEncoder();
 
 export class ObjectParser<
-  T extends ObjectParserArg,
+  T extends ObjectParserArg = {},
   ExtraFields = {},
   SerializedType = ObjSerializedType<T>
-> extends Parser {
+> implements Parser
+{
   private fields: Array<[string, Parser]>;
   private isJson = false;
   private isCompressed = false;
-  constructor(fields: T) {
-    super();
-    this.fields = Object.entries(fields);
+  public fromField: string | undefined;
+  constructor(fields?: T) {
+    this.fields = Object.entries(fields ?? {});
   }
 
   parse(data: SerializedType) {
-    let obj = data as ObjSerializedType<T>;
-    if (this.isCompressed) {
-      const json = lzf.decompress(data).toString();
-      if (!this.isJson) throw new Error('Compression enabled without json');
-      obj = JSON.parse(json);
-    }
+    let obj = this.preProcessData(data) as ObjSerializedType<T>;
+
     const result = { ...obj } as { [key: string]: any };
     for (const [key, parser] of this.fields) {
-      result[key] = parser.parse(obj[key]);
+      result[key] = parser.parse(obj[parser.fromField || key]);
     }
     return result as CastAny<ExtraFields, {}> & ObjParsedType<T>;
+  }
+
+  private preProcessData(data: any) {
+    let result = data;
+    if (this.isCompressed) result = lzf.decompress(result).toString();
+    if (this.isJson) result = JSON.parse(result);
+    return result;
   }
 
   serialize(data: ObjParsedType<T>): SerializedType {
     let result = { ...data } as Record<string, any>;
     for (const [key, parser] of this.fields) {
-      result[key] = parser.serialize(data[key]);
+      result[parser.fromField || key] = parser.serialize(data[key]);
     }
     if (!this.isJson) return result as SerializedType;
     const json = JSON.stringify(result);
@@ -63,8 +67,13 @@ export class ObjectParser<
   }
 
   compressed() {
-    if (this.isJson) throw new Error('Non-json field cannot be compressed');
+    if (!this.isJson) throw new Error('Non-json field cannot be compressed');
     this.isCompressed = true;
     return this as unknown as ObjectParser<T, ExtraFields, Uint8Array>;
+  }
+
+  from(field: string) {
+    this.fromField = field;
+    return this;
   }
 }

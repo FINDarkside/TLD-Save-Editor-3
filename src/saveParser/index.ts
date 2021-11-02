@@ -1,8 +1,9 @@
 import { ObjectParser } from './ObjectParser';
 
-export abstract class Parser {
-  abstract parse(data: any): any;
-  abstract serialize(data: any): any;
+export interface Parser {
+  fromField: string | undefined;
+  parse(data: any): any;
+  serialize(data: any): any;
 }
 
 function createFactoryFunction<A extends any[], R>(
