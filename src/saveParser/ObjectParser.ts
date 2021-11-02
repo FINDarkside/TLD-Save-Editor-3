@@ -22,8 +22,8 @@ export class ObjectParser<
 > implements Parser
 {
   private fields: Array<[string, Parser]>;
-  private isJson = false;
-  private isCompressed = false;
+  public isJson = false;
+  public isCompressed = false;
   public fromField: string | undefined;
   constructor(fields?: T) {
     this.fields = Object.entries(fields ?? {});
@@ -51,8 +51,8 @@ export class ObjectParser<
 
     for (const [key, parser] of this.fields) {
       const resultKey = parser.fromField || key;
-      if (data[key] instanceof Buffer) {
-        result[resultKey] = parser.serialize(Object.values(data[key]));
+      if (parser.isCompressed) {
+        result[resultKey] = Object.values(parser.serialize(data[key]));
       } else {
         result[resultKey] = parser.serialize(data[key]);
       }
