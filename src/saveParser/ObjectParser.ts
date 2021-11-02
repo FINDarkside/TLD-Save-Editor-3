@@ -48,12 +48,20 @@ export class ObjectParser<
 
   serialize(data: ObjParsedType<T>): SerializedType {
     let result = { ...data } as Record<string, any>;
+
     for (const [key, parser] of this.fields) {
-      result[parser.fromField || key] = parser.serialize(data[key]);
+      const resultKey = parser.fromField || key;
+      if (data[key] instanceof Buffer) {
+        result[resultKey] = parser.serialize(Object.values(data[key]));
+      } else {
+        result[resultKey] = parser.serialize(data[key]);
+      }
+      if (parser.fromField) delete result[key];
     }
+
     if (!this.isJson) return result as SerializedType;
     const json = JSON.stringify(result);
-    if (!this.isCompressed) json as unknown as SerializedType;
+    if (!this.isCompressed) return json as unknown as SerializedType;
     return lzf.compress(textEncoder.encode(json)) as unknown as SerializedType;
   }
 

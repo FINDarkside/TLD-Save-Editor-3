@@ -2,8 +2,8 @@ import { ObjectParser } from './ObjectParser';
 
 export interface Parser {
   fromField: string | undefined;
-  parse(data: any): any;
-  serialize(data: any): any;
+  parse(data: any): Record<string, any>;
+  serialize(data: any): Record<string, any> | string | Buffer;
 }
 
 function createFactoryFunction<A extends any[], R>(
