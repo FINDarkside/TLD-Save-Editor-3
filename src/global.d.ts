@@ -1,4 +1,5 @@
-// https://stackoverflow.com/a/55541672/2716059
+/// <reference types="svelte" />
+
 type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N;
 type IsAny<T> = IfAny<T, true, never>;
 

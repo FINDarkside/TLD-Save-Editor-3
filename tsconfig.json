@@ -1,15 +1,11 @@
 {
-  "ts-node": {
-    "files": true
-  },
+  "extends": "@tsconfig/svelte/tsconfig.json",
+
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
   "compilerOptions": {
-    "target": "ESNext",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
     "strict": true,
     "allowJs": true,
-    "maxNodeModuleJsDepth": 5,
-    "baseUrl": "src/"
-  },
-  "include": ["src/**/*.ts", "src/global.d.ts"]
+    "maxNodeModuleJsDepth": 5
+  }
 }
