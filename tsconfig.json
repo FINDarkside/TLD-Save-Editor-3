@@ -9,7 +9,7 @@
     "strict": true,
     "allowJs": true,
     "maxNodeModuleJsDepth": 5,
-    "baseUrl": "./src"
+    "baseUrl": "src/"
   },
-  "files": ["src/**/*.ts", "src/global.d.ts"]
+  "include": ["src/**/*.ts", "src/global.d.ts"]
 }
