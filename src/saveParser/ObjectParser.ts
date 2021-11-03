@@ -1,8 +1,7 @@
 import lzf from 'lzfjs';
-import { Parser } from './index';
 
 interface ObjectParserArg {
-  [key: string]: Parser;
+  [key: string]: ObjectParser;
 }
 
 type ObjParsedType<T extends ObjectParserArg> = {
@@ -19,12 +18,11 @@ export class ObjectParser<
   T extends ObjectParserArg = {},
   ExtraFields = {},
   SerializedType = ObjSerializedType<T>
-> implements Parser
-{
-  private fields: Array<[string, Parser]>;
-  public isJson = false;
-  public isCompressed = false;
-  public fromField: string | undefined;
+> {
+  private fields: Array<[string, ObjectParser]>;
+  protected isJson = false;
+  protected isCompressed = false;
+  protected fromField: string | undefined;
   constructor(fields?: T) {
     this.fields = Object.entries(fields ?? {});
   }
