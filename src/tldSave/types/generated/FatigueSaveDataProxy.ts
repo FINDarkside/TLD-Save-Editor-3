@@ -1,4 +1,4 @@
-import FatigueLevel from './enums/FatigueLevel';
+import type FatigueLevel from './enums/FatigueLevel';
 
 export default interface FatigueSaveDataProxy {
   m_CurrentFatigueProxy: number;

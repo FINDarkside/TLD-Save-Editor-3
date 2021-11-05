@@ -1,4 +1,4 @@
-import WeatherStage from './enums/WeatherStage';
+import type WeatherStage from './enums/WeatherStage';
 
 export default interface WeatherTransitionSaveDataProxy {
   m_UseUnmanagedWeatherStage: boolean;

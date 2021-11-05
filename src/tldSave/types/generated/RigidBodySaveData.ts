@@ -1,4 +1,4 @@
-import CollisionDetectionMode from './enums/CollisionDetectionMode';
+import type CollisionDetectionMode from './enums/CollisionDetectionMode';
 
 export default interface RigidBodySaveData {
   m_IsKinematic: boolean;

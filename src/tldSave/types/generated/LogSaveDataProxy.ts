@@ -1,4 +1,4 @@
-import LogDayInfo from './LogDayInfo';
+import type LogDayInfo from './LogDayInfo';
 
 export default interface LogSaveDataProxy {
   m_GeneralNotes: string;

@@ -1,4 +1,4 @@
-import CustomManagedObjectState from './enums/CustomManagedObjectState';
+import type CustomManagedObjectState from './enums/CustomManagedObjectState';
 
 export default interface MissionServicesManagerSaveProxy {
   m_SerializedGlobalBlackboard: string;

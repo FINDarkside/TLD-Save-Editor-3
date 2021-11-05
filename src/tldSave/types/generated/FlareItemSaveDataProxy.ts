@@ -1,4 +1,4 @@
-import FlareState from './enums/FlareState';
+import type FlareState from './enums/FlareState';
 
 export default interface FlareItemSaveDataProxy {
   m_HoursPlayed: number;

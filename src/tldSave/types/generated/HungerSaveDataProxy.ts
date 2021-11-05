@@ -1,4 +1,4 @@
-import HungerLevel from './enums/HungerLevel';
+import type HungerLevel from './enums/HungerLevel';
 
 export default interface HungerSaveDataProxy {
   m_CurrentReserveCaloriesProxy: number;

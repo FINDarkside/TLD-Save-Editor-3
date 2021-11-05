@@ -1,5 +1,5 @@
-import WindDirection from './enums/WindDirection';
-import WindStrength from './enums/WindStrength';
+import type WindDirection from './enums/WindDirection';
+import type WindStrength from './enums/WindStrength';
 
 export default interface WindSaveDataProxy {
   m_Version: number;

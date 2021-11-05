@@ -1,4 +1,4 @@
-import LocalizedString from './LocalizedString';
+import type LocalizedString from './LocalizedString';
 
 export default interface NPC_UnlockablePrefabInfo {
   m_LocalizedDisplayName: LocalizedString;

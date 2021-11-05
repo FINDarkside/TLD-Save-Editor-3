@@ -1,4 +1,4 @@
-import IndoorWardData from './IndoorWardData';
+import type IndoorWardData from './IndoorWardData';
 
 export default interface InvisibleEntityManagerGlobalDataProxy {
   m_AttackMovementSpeed: number;

@@ -1,4 +1,4 @@
-import LinkedChimneySaveData from './LinkedChimneySaveData';
+import type LinkedChimneySaveData from './LinkedChimneySaveData';
 
 export default interface ChimneySaveList {
   /** @default {List<LinkedChimneySaveData>} */

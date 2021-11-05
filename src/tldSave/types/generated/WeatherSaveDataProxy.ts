@@ -1,5 +1,5 @@
-import WeatherStage from './enums/WeatherStage';
-import TODBlendState from './enums/TODBlendState';
+import type WeatherStage from './enums/WeatherStage';
+import type TODBlendState from './enums/TODBlendState';
 
 export default interface WeatherSaveDataProxy {
   m_PrevBodyTempProxy: number;

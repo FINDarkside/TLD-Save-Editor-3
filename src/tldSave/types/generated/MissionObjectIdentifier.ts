@@ -1,4 +1,4 @@
-import MissionObjectClass from './enums/MissionObjectClass';
+import type MissionObjectClass from './enums/MissionObjectClass';
 
 export default interface MissionObjectIdentifier {
   m_Id: string;

@@ -1,4 +1,4 @@
-import NPC_NeedPrefabInfo from './NPC_NeedPrefabInfo';
+import type NPC_NeedPrefabInfo from './NPC_NeedPrefabInfo';
 
 export default interface NeedPrefabSaveData {
   m_NeedPrefab: NPC_NeedPrefabInfo;

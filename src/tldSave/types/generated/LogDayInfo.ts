@@ -1,4 +1,4 @@
-import AfflictionType from './enums/AfflictionType';
+import type AfflictionType from './enums/AfflictionType';
 
 export default interface LogDayInfo {
   m_DayNumber: number;

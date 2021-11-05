@@ -1,4 +1,4 @@
-import MissionObjectiveCountType from './enums/MissionObjectiveCountType';
+import type MissionObjectiveCountType from './enums/MissionObjectiveCountType';
 
 export default interface StoryMissionObjective {
   objectiveID: string;

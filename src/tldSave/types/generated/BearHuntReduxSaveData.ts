@@ -1,4 +1,4 @@
-import BearEncounterInfo from './BearEncounterInfo';
+import type BearEncounterInfo from './BearEncounterInfo';
 
 export default interface BearHuntReduxSaveData {
   m_DeprecatedActive: boolean;

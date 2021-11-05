@@ -1,5 +1,5 @@
-import DialogueSequenceProgressionInfo from './DialogueSequenceProgressionInfo';
-import PhoneSaveDataInfo from './PhoneSaveDataInfo';
+import type DialogueSequenceProgressionInfo from './DialogueSequenceProgressionInfo';
+import type PhoneSaveDataInfo from './PhoneSaveDataInfo';
 
 export default interface PhoneManagerSaveData {
   /** @default {List<DialogueSequenceProgressionInfo>} */

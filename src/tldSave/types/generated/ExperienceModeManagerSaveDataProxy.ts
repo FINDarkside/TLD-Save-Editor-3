@@ -1,4 +1,4 @@
-import ExperienceModeType from './enums/ExperienceModeType';
+import type ExperienceModeType from './enums/ExperienceModeType';
 
 export default interface ExperienceModeManagerSaveDataProxy {
   m_CurrentModeType: ExperienceModeType;

@@ -1,4 +1,4 @@
-import FreezingLevel from './enums/FreezingLevel';
+import type FreezingLevel from './enums/FreezingLevel';
 
 export default interface FreezingSaveDataProxy {
   m_CurrentFreezingProxy: number;

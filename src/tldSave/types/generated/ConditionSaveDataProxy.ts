@@ -1,4 +1,4 @@
-import ConditionLevel from './enums/ConditionLevel';
+import type ConditionLevel from './enums/ConditionLevel';
 
 export default interface ConditionSaveDataProxy {
   m_CurrentHPProxy: number;

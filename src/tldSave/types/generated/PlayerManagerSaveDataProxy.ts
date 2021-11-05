@@ -1,5 +1,5 @@
-import VoicePersona from './enums/VoicePersona';
-import SerializableBounds from './SerializableBounds';
+import type VoicePersona from './enums/VoicePersona';
+import type SerializableBounds from './SerializableBounds';
 
 export default interface PlayerManagerSaveDataProxy {
   m_SaveGamePosition: [number, number, number];

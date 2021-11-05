@@ -1,4 +1,4 @@
-import BedRollState from './enums/BedRollState';
+import type BedRollState from './enums/BedRollState';
 
 export default interface BedSaveDataProxy {
   m_BedRollState: BedRollState;

@@ -1,4 +1,4 @@
-import AfflictionBodyArea from './enums/AfflictionBodyArea';
+import type AfflictionBodyArea from './enums/AfflictionBodyArea';
 
 export default interface SprainPainSaveDataProxy {
   m_Location: AfflictionBodyArea;

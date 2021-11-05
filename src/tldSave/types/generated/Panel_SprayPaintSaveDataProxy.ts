@@ -1,5 +1,5 @@
-import ProjectileType from './enums/ProjectileType';
-import LocalizedString from './LocalizedString';
+import type ProjectileType from './enums/ProjectileType';
+import type LocalizedString from './LocalizedString';
 
 export default interface Panel_SprayPaintSaveDataProxy {
   ProjectileType: ProjectileType;

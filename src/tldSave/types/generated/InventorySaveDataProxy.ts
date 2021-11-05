@@ -1,4 +1,4 @@
-import InventoryItemSaveData from './InventoryItemSaveData';
+import type InventoryItemSaveData from './InventoryItemSaveData';
 
 export default interface InventorySaveDataProxy {
   /** @default {List<InventoryItemSaveData>} */

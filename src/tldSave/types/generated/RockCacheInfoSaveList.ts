@@ -1,5 +1,5 @@
-import RockCacheInfo from './RockCacheInfo';
-import RockCacheDestroyedInfo from './RockCacheDestroyedInfo';
+import type RockCacheInfo from './RockCacheInfo';
+import type RockCacheDestroyedInfo from './RockCacheDestroyedInfo';
 
 export default interface RockCacheInfoSaveList {
   /** @default {List<RockCacheInfo>} */

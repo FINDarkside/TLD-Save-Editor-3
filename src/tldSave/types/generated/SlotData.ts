@@ -1,5 +1,5 @@
-import SaveSlotType from './enums/SaveSlotType';
-import Episode from './enums/Episode';
+import type SaveSlotType from './enums/SaveSlotType';
+import type Episode from './enums/Episode';
 
 export default interface SlotData {
   m_Name: string;

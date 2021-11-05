@@ -1,4 +1,4 @@
-import EncumberLevel from './enums/EncumberLevel';
+import type EncumberLevel from './enums/EncumberLevel';
 
 export default interface EncumberSaveDataProxy {
   m_EncumberedInLog: boolean;

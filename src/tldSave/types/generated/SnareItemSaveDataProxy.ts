@@ -1,4 +1,4 @@
-import SnareState from './enums/SnareState';
+import type SnareState from './enums/SnareState';
 
 export default interface SnareItemSaveDataProxy {
   m_HoursPlayed: number;

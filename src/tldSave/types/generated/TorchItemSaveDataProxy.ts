@@ -1,4 +1,4 @@
-import TorchState from './enums/TorchState';
+import type TorchState from './enums/TorchState';
 
 export default interface TorchItemSaveDataProxy {
   m_HoursPlayed: number;

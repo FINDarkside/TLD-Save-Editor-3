@@ -1,4 +1,4 @@
-import ThirstLevel from './enums/ThirstLevel';
+import type ThirstLevel from './enums/ThirstLevel';
 
 export default interface ThirstSaveDataProxy {
   m_CurrentThirstProxy: number;
