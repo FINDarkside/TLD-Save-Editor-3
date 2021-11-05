@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "electron-serve": "^1.1.0",
-    "lzfjs": "^1.0.1"
+    "lzfjs": "^1.0.1",
+    "svelte-materialify": "^0.3.11"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
@@ -37,6 +38,8 @@
     "concurrently": "^6.2.1",
     "electron": "^13.1.9",
     "electron-builder": "^22.11.7",
+    "node-sass": "^6.0.1",
+    "postcss": "^8.3.11",
     "rollup": "^2.56.2",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.5",
