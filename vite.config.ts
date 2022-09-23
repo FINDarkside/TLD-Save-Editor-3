@@ -1,11 +1,14 @@
-import { rmSync } from 'fs'
-import path from 'path'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import electron, { onstart } from 'vite-plugin-electron'
-import pkg from './package.json'
+import { rmSync } from 'fs';
+import path from 'path';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import electron, { onstart } from 'vite-plugin-electron';
+import pkg from './package.json';
 
-rmSync('dist', { recursive: true, force: true }) // v14.14.0
+rmSync('dist', { recursive: true, force: true }); // v14.14.0
+
+// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
+import vuetify from 'vite-plugin-vuetify';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -41,9 +44,12 @@ export default defineConfig({
       // https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#electron-renderervite-serve
       renderer: {},
     }),
+    vuetify({ autoImport: true }),
   ],
-  server: process.env.VSCODE_DEBUG ? {
-    host: pkg.debug.env.VITE_DEV_SERVER_HOSTNAME,
-    port: pkg.debug.env.VITE_DEV_SERVER_PORT,
-  } : undefined,
-})
+  server: process.env.VSCODE_DEBUG
+    ? {
+        host: pkg.debug.env.VITE_DEV_SERVER_HOSTNAME,
+        port: pkg.debug.env.VITE_DEV_SERVER_PORT,
+      }
+    : undefined,
+});
