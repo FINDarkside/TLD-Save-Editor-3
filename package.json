@@ -13,6 +13,7 @@
     "@mdi/font": "5.9.55",
     "lzfjs": "^1.0.1",
     "roboto-fontface": "*",
+    "sass": "^1.55.0",
     "vuetify": "^3.0.0-beta.0",
     "webfontloader": "^1.0.0"
   },

@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import store from '../../store'
+import store from '../store'
 import { computed, reactive, ref, watch } from 'vue';
 
 const condition = computed(() => store.currentSave?.data.m_Dict.global.condition);

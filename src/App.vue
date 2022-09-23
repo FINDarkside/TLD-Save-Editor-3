@@ -14,7 +14,7 @@
         <v-btn @click="store.saveCurrent()">Save</v-btn>
       </div>
 
-      <PlayerTab></PlayerTab>
+      <InventoryTab></InventoryTab>
 
 
     </v-main>
@@ -23,9 +23,8 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import Inventory from './components/tabs/Inventory.vue'
 import store from './store'
-import PlayerTab from './components/tabs/PlayerTab.vue';
+import InventoryTab from './components/InventoryTab.vue';
 
 const tab = ref(null)
 
@@ -34,3 +33,9 @@ const select = ref<undefined | string>()
 
 store.loadSave('C:/Users/FINDarkside/AppData/Local/Hinterland/TheLongDark/sandbox1');
 </script>
+
+<style>
+html {
+  overflow-x: hidden;
+}
+</style>
