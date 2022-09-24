@@ -8,8 +8,12 @@ interface GameSave {
   data: ReturnType<typeof parser['parse']>;
 }
 
-const store = reactive({
+const store = {
   currentSave: undefined as undefined | GameSave,
+
+  get global() {
+    return this.currentSave?.data.m_Dict.global;
+  },
 
   async loadSave(file: string) {
     const buf = await readFile(file);
@@ -24,6 +28,6 @@ const store = reactive({
     const buf = tldParser.serialize(this.currentSave.data);
     await writeFile(this.currentSave.file, buf);
   },
-});
+};
 
-export default store;
+export default reactive(store);

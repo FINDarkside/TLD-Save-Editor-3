@@ -1,20 +1,19 @@
 <template>
   <v-app>
     <v-main>
-      <div>
+      <div class="topBar">
         <v-select
           :items="items"
           item-value="value"
           item-title="name"
           label="Current save"
           variant="underlined"
+          hide-details
         ></v-select>
-      </div>
-      <div>
         <v-btn @click="store.saveCurrent()">Save</v-btn>
       </div>
 
-      <InventoryTab></InventoryTab>
+      <TabSwitch />
 
 
     </v-main>
@@ -24,7 +23,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import store from './store'
-import InventoryTab from './components/InventoryTab.vue';
+import TabSwitch from './components/TabSwitch.vue';
 
 const tab = ref(null)
 
@@ -37,5 +36,11 @@ store.loadSave('C:/Users/FINDarkside/AppData/Local/Hinterland/TheLongDark/sandbo
 <style>
 html {
   overflow-x: hidden;
+}
+
+.topBar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 </style>
