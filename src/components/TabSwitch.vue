@@ -1,9 +1,7 @@
 <template>
 
-  <div class="container">
-    <v-tabs
-      v-model="selectedTab"
-    >
+  <div :class="$style.container">
+    <v-tabs v-model="selectedTab">
       <v-tab v-for="tab in tabs">{{ tab.name }}</v-tab>
     </v-tabs>
     <template v-for="(tab, i) in tabs">
@@ -16,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import G from 'glob';
 import { h, shallowRef, ref, watch } from 'vue'
 import InventoryTab from './InventoryTab.vue';
 import PlayerTab from './PlayerTab.vue';
@@ -29,6 +26,10 @@ const selectedTab = ref(0)
 
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss" module>
+.container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 </style>

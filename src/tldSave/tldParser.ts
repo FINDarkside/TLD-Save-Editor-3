@@ -58,7 +58,7 @@ const inventoryParser = parseObject({
         // m_MissionObjectSerialized
         research: parseObject().from('m_ResearchItemSerialized').json().withFields<ResearchItemSaveData>(),
         // ownership
-        bodyHarvers: parseObject().from('m_BodyHarvestSerialized').json().withFields<BodyHarvestSaveDataProxy>(),
+        bodyHarvest: parseObject().from('m_BodyHarvestSerialized').json().withFields<BodyHarvestSaveDataProxy>(),
         cookingPot: parseObject().from('m_CookingPotItemSerialized').json().withFields<CookingPotItemSaveDataProxy>(),
         // m_PlacePointGuidSerialized
         // m_PlacePointNameSerialized

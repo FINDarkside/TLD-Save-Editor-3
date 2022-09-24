@@ -1,7 +1,6 @@
 <template>
-
-  <div class="container">
-    <v-list class="itemListPanel">
+  <div :class="$style.container">
+    <v-list :class="$style.itemListPanel">
       <v-list-item
         v-for="(item, i) in items"
         :key="i"
@@ -13,41 +12,41 @@
       </v-list-item>
     </v-list>
 
-    <div
+    <ItemView
       v-if="selectedItem"
-      class="itemContainer"
+      :class="$style.itemContainer"
+      :item="selectedItem"
     >
-      Stackable: {{ selectedItem.gear?.stackable }}
-    </div>
+    </ItemView>
   </div>
-
 </template>
 
 <script setup lang="ts">
 import store from '../store'
 import { ref, watch, toRaw } from 'vue';
 import { computed } from '@vue/reactivity';
+import ItemView from './ItemView.vue';
 
 const items = computed(() => store.currentSave?.data?.m_Dict.global?.inventory?.items?.map((item) => ({ title: item?.m_PrefabName, value: item })))
 const selectedItem = ref(null as null | NonNullable<typeof items.value>[number]['value'])
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 .container {
+  overflow-y: hidden;
   display: flex;
-  flex-direction: row;
 }
 
 .itemListPanel {
-  flex-shrink: 0;
   width: 20em;
+  overflow-y: auto;
   height: 100%;
 }
 
 .itemContainer {
   margin: 2em;
-  overflow-wrap: break-word;
   min-width: 0;
+  flex-grow: 1;
 }
 </style>

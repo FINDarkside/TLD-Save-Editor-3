@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <v-main>
-      <div class="topBar">
+    <v-main :class="$style.app">
+      <div :class="$style.topBar">
         <v-select
           :items="items"
           item-value="value"
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import store from './store'
 import TabSwitch from './components/TabSwitch.vue';
 
@@ -30,17 +30,32 @@ const tab = ref(null)
 const items = ref([{ name: 'Save 1', value: 'file1' }, { name: 'Save 1', value: 'file2' }])
 const select = ref<undefined | string>()
 
-store.loadSave('C:/Users/FINDarkside/AppData/Local/Hinterland/TheLongDark/sandbox4');
+onMounted(() => {
+  console.log('asd')
+  if (!store.currentSave) {
+    console.log('MOUNT');
+    store.loadSave('C:/Users/FINDarkside/AppData/Local/Hinterland/TheLongDark/sandbox1')
+  }
+});
+
 </script>
 
 <style>
 html {
-  overflow-x: hidden;
+  overflow: auto;
 }
+</style>
 
-.topBar{
+<style module>
+.topBar {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>
