@@ -10,7 +10,7 @@
   },
   "main": "dist/electron/main/index.js",
   "dependencies": {
-    "@mdi/font": "5.9.55",
+    "@mdi/font": "7.0.96",
     "lzfjs": "^1.0.1",
     "roboto-fontface": "*",
     "sass": "^1.55.0",
