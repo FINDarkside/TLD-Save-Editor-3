@@ -1,4 +1,5 @@
 import lzf from 'lzfjs';
+import JSON5 from 'json5';
 import Parser from './Parser';
 
 interface ObjectParserArg {
@@ -45,12 +46,11 @@ export class ObjectParser<
   private preProcessData(data: any) {
     let result = data;
     if (this.isCompressed) result = lzf.decompress(result).toString();
-    if (this.isJson)
-      result = JSON.parse((result as string).replaceAll('Infinity', '0'));
+    if (this.isJson) result = JSON5.parse(result);
     return result;
   }
 
-  serialize(data: ObjParsedType<T>): SerializedType | undefined {
+  serialize(data: ObjParsedType<T>): Optional<SerializedType> {
     let result = { ...data } as Record<string, any>;
 
     for (const [key, parser] of this.fields) {
@@ -68,7 +68,7 @@ export class ObjectParser<
     }
 
     if (!this.isJson) return result as SerializedType;
-    const json = JSON.stringify(result);
+    const json = JSON5.stringify(result);
     if (!this.isCompressed) return json as unknown as SerializedType;
     return lzf.compress(textEncoder.encode(json)) as unknown as SerializedType;
   }
