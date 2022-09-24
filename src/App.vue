@@ -30,7 +30,7 @@ const tab = ref(null)
 const items = ref([{ name: 'Save 1', value: 'file1' }, { name: 'Save 1', value: 'file2' }])
 const select = ref<undefined | string>()
 
-store.loadSave('C:/Users/FINDarkside/AppData/Local/Hinterland/TheLongDark/sandbox1');
+store.loadSave('C:/Users/FINDarkside/AppData/Local/Hinterland/TheLongDark/sandbox4');
 </script>
 
 <style>

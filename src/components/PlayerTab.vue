@@ -27,7 +27,6 @@
         v-model="condition.m_NeverDieProxy"
         label="Never die"
         color="red"
-
         hide-details
         density="compact"
       ></v-switch>
@@ -86,9 +85,12 @@
 import store from '../store'
 import { computed, reactive, ref, watch } from 'vue';
 import { freemem } from 'os';
+import { glob } from 'glob';
 
 const global = computed(() => store.global);
 const condition = computed(() => store.global?.condition);
+
+watch(() => global, () => console.log('global', global))
 
 
 </script>

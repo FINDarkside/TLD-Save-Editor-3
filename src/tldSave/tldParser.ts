@@ -72,7 +72,7 @@ const inventoryParser = parseObject({
         .json()
         .withFields<GearItemSaveDataProxy>(),
     }).withFields<InventoryItemSaveData>()
-  ),
+  ).from('m_SerializedItems'),
 })
   .from('m_Inventory_Serialized')
   .json()
@@ -81,7 +81,7 @@ const inventoryParser = parseObject({
 const tldParser = parseObject({
   m_Dict: parseObject({
     global: parseObject({
-      // inventory: inventoryParser.from('m_SerializedItems'),
+      inventory: inventoryParser,
       condition: parseObject().from('m_Condition_Serialized').json().withFields<ConditionSaveDataProxy>(),
       hunger: parseObject().from('m_Hunger_Serialized').json().withFields<HungerSaveDataProxy>(),
       thirst: parseObject().from('m_Thirst_Serialized').json().withFields<ThirstSaveDataProxy>(),
@@ -98,6 +98,7 @@ const tldParser = parseObject({
   .compressed()
   .withFields<SlotData>();
 
-//const save = tldParser.parse(Buffer.alloc(1));
+//  const save = tldParser.parse(Buffer.alloc(1));
+// save?.m_Dict.global.condition;
 
 export default tldParser;

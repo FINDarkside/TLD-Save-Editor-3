@@ -17,7 +17,7 @@
       v-if="selectedItem"
       class="itemContainer"
     >
-      Stackable: {{ selectedItem.gear.m_StackableItemSerialized }}
+      Stackable: {{ selectedItem.gear?.stackable }}
     </div>
   </div>
 
@@ -28,7 +28,7 @@ import store from '../store'
 import { ref, watch, toRaw } from 'vue';
 import { computed } from '@vue/reactivity';
 
-const items = computed(() => store.currentSave?.data.m_Dict.global.inventory.items?.map((item) => ({ title: item.m_PrefabName, value: item })))
+const items = computed(() => store.currentSave?.data?.m_Dict.global?.inventory?.items?.map((item) => ({ title: item.m_PrefabName, value: item })))
 const selectedItem = ref(null as null | NonNullable<typeof items.value>[number]['value'])
 
 watch(() => store.currentSave, () => console.log(toRaw(store.global?.inventory)))

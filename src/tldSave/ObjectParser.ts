@@ -6,11 +6,11 @@ interface ObjectParserArg {
 }
 
 type ObjParsedType<T extends ObjectParserArg> = {
-  [key in keyof T]: ReturnType<T[key]['parse']>;
+  [key in keyof T]?: Required<ReturnType<T[key]['parse']>>;
 };
 
 type ObjSerializedType<T extends ObjectParserArg> = {
-  [key in keyof T]: ReturnType<T[key]['serialize']>;
+  [key in keyof T]?: Required<ReturnType<T[key]['serialize']>>;
 };
 
 const textEncoder = new TextEncoder();
@@ -29,11 +29,15 @@ export class ObjectParser<
   }
 
   parse(data: SerializedType) {
+    if (data == null) return undefined;
     let obj = this.preProcessData(data) as ObjSerializedType<T>;
 
     const result = { ...obj } as { [key: string]: any };
     for (const [key, parser] of this.fields) {
-      result[key] = parser.parse(obj[parser.fromField || key]);
+      const valueKey = parser.fromField || key;
+      const value = obj[valueKey];
+      if (value == null) return value;
+      result[key] = parser.parse(value);
     }
     return result as CastAny<ExtraFields, {}> & ObjParsedType<T>;
   }
@@ -41,19 +45,24 @@ export class ObjectParser<
   private preProcessData(data: any) {
     let result = data;
     if (this.isCompressed) result = lzf.decompress(result).toString();
-    if (this.isJson) result = JSON.parse(result);
+    if (this.isJson)
+      result = JSON.parse((result as string).replaceAll('Infinity', '0'));
     return result;
   }
 
-  serialize(data: ObjParsedType<T>): SerializedType {
+  serialize(data: ObjParsedType<T>): SerializedType | undefined {
     let result = { ...data } as Record<string, any>;
 
     for (const [key, parser] of this.fields) {
       const resultKey = parser.fromField || key;
+      const value = data[key];
+      if (value == null) return value;
       if (parser.isCompressed) {
-        result[resultKey] = Object.values(parser.serialize(data[key]));
+        const serializedValues = parser.serialize(value);
+        if (serializedValues == null) result[resultKey] = serializedValues;
+        else result[resultKey] = Object.values(serializedValues);
       } else {
-        result[resultKey] = parser.serialize(data[key]);
+        result[resultKey] = parser.serialize(value);
       }
       if (parser.fromField) delete result[key];
     }
