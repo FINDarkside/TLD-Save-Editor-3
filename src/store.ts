@@ -18,8 +18,6 @@ const store = {
   async loadSave(file: string) {
     const buf = await readFile(file);
     const saveData = tldParser.parse(buf);
-    console.log(saveData);
-    console.log(saveData?.m_Dict.global);
     this.currentSave = {
       file,
       data: saveData,

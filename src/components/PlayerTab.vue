@@ -90,8 +90,6 @@ import { glob } from 'glob';
 const global = computed(() => store.global);
 const condition = computed(() => store.global?.condition);
 
-watch(() => global, () => console.log('global', global))
-
 
 </script>
 

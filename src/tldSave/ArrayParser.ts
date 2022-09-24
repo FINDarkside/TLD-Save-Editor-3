@@ -12,7 +12,6 @@ export class ArrayParser<T extends Parser> {
   }
 
   parse(data: Array<ReturnType<T['serialize']>>) {
-    console.log('data', data);
     return data.map((item) => this.parser.parse(item)) as ReturnType<
       T['parse']
     >[];

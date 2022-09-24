@@ -27,8 +27,6 @@ const tabs = shallowRef([
 ])
 const selectedTab = ref(0)
 
-watch(selectedTab, () => console.log(selectedTab))
-
 </script>
 
 <style lang="scss" scoped>
