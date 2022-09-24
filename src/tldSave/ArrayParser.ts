@@ -12,13 +12,14 @@ export class ArrayParser<T extends Parser> {
   }
 
   parse(data: Array<ReturnType<T['serialize']>>) {
+    if (!data) return null;
     return data.map((item) => this.parser.parse(item)) as ReturnType<
       T['parse']
     >[];
   }
 
   serialize(data: ReturnType<T['parse']>[]) {
-    return data.map((item) => this.parser?.serialize(item));
+    return data.map((item) => this.parser.serialize(item));
   }
 
   from(field: string) {

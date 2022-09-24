@@ -1,7 +1,9 @@
 import { readFile, writeFile } from 'fs/promises';
-import { reactive } from 'vue';
+import lzf from 'lzfjs';
+import { reactive, toRaw } from 'vue';
 import tldParser from './tldSave/tldParser';
 import parser from './tldSave/tldParser';
+import JSON5 from 'json5';
 
 interface GameSave {
   file: string;
@@ -25,11 +27,20 @@ const store = {
   },
   async saveCurrent() {
     if (!this.currentSave) return;
-    const data = this.currentSave.data;
+    const data = structuredClone(toRaw(this.currentSave.data));
     if (!data) throw new Error(`data is null`);
     const buf = tldParser.serialize(data);
     if (!buf) throw new Error(`buf is null`);
     await writeFile(this.currentSave.file, buf);
+
+    // const buf1 = await readFile(
+    //   'C:/Users/FINDarkside/AppData/Local/Hinterland/TheLongDark/sandbox1'
+    // );
+    // const decrypted = lzf.decompress(buf1).toString();
+    // const afterDecrypted = lzf.decompress(buf).toString();
+
+    // writeFile('./saveOriginal.json', decrypted);
+    // writeFile('./saveAfter.json', afterDecrypted);
   },
 };
 

@@ -11,7 +11,6 @@
   "main": "dist/electron/main/index.js",
   "dependencies": {
     "@mdi/font": "5.9.55",
-    "json5": "^2.2.1",
     "lzfjs": "^1.0.1",
     "roboto-fontface": "*",
     "sass": "^1.55.0",
@@ -19,6 +18,7 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^18.7.20",
     "@types/webfontloader": "^1.0.0",
     "@vitejs/plugin-vue": "^3.0.3",
     "electron": "^20.0.2",

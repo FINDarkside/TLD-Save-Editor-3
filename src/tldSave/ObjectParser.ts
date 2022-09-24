@@ -1,5 +1,4 @@
 import lzf from 'lzfjs';
-import JSON5 from 'json5';
 import Parser from './Parser';
 
 interface ObjectParserArg {
@@ -7,11 +6,12 @@ interface ObjectParserArg {
 }
 
 type ObjParsedType<T extends ObjectParserArg> = {
-  [key in keyof T]?: Required<ReturnType<T[key]['parse']>>;
+  [key in keyof T]: ReturnType<T[key]['parse']>;
 };
 
 type ObjSerializedType<T extends ObjectParserArg> = {
-  [key in keyof T]?: Required<ReturnType<T[key]['serialize']>>;
+  // Not sure why this needs to be wrapped in NonNullable to keep return types
+  [key in keyof T]: Optional<NonNullable<ReturnType<T[key]['serialize']>>>;
 };
 
 const textEncoder = new TextEncoder();
@@ -37,7 +37,6 @@ export class ObjectParser<
     for (const [key, parser] of this.fields) {
       const valueKey = parser.fromField || key;
       const value = obj[valueKey];
-      if (value == null) return value;
       result[key] = parser.parse(value);
     }
     return result as CastAny<ExtraFields, {}> & ObjParsedType<T>;
@@ -46,21 +45,25 @@ export class ObjectParser<
   private preProcessData(data: any) {
     let result = data;
     if (this.isCompressed) result = lzf.decompress(result).toString();
-    if (this.isJson) result = JSON5.parse(result);
+    if (this.isJson) {
+      // FIXME: Handle this better
+      result = JSON.parse((result as string).replaceAll('Infinity', '0'));
+    }
     return result;
   }
 
   serialize(data: ObjParsedType<T>): Optional<SerializedType> {
+    if (data == null) return null;
     let result = { ...data } as Record<string, any>;
 
     for (const [key, parser] of this.fields) {
       const resultKey = parser.fromField || key;
       const value = data[key];
-      if (value == null) return value;
       if (parser.isCompressed) {
-        const serializedValues = parser.serialize(value);
-        if (serializedValues == null) result[resultKey] = serializedValues;
-        else result[resultKey] = Object.values(serializedValues);
+        const buf = parser.serialize(value);
+        if (buf == null) result[resultKey] = buf;
+        // TLD wants binary data as number arrays
+        else result[resultKey] = Object.values(buf);
       } else {
         result[resultKey] = parser.serialize(value);
       }
@@ -68,7 +71,7 @@ export class ObjectParser<
     }
 
     if (!this.isJson) return result as SerializedType;
-    const json = JSON5.stringify(result);
+    const json = JSON.stringify(result);
     if (!this.isCompressed) return json as unknown as SerializedType;
     return lzf.compress(textEncoder.encode(json)) as unknown as SerializedType;
   }
