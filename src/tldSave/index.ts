@@ -1,3 +1,4 @@
+import { ArrayParser } from './ArrayParser';
 import { ObjectParser } from './ObjectParser';
 
 function createFactoryFunction<A extends any[], R>(
@@ -6,4 +7,7 @@ function createFactoryFunction<A extends any[], R>(
   return (...args) => new constructor(...args);
 }
 
-export default createFactoryFunction(ObjectParser);
+const parseObject = createFactoryFunction(ObjectParser);
+const parseArray = createFactoryFunction(ArrayParser);
+
+export { parseObject, parseArray };

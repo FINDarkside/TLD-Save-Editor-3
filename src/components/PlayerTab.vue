@@ -26,7 +26,8 @@
         class="fullRow"
         v-model="condition.m_NeverDieProxy"
         label="Never die"
-        color="primary"
+        color="red"
+
         hide-details
         density="compact"
       ></v-switch>
