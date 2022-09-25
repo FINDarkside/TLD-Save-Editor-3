@@ -1,15 +1,15 @@
 
 export default interface SceneTransitionData {
-  m_TeleportPlayerSaveGamePosition: boolean;
-  m_SpawnPointName: string;
-  m_SpawnPointAudio: string;
-  m_ForceSceneOnNextNavMapLoad: string;
-  m_ForceNextSceneLoadTriggerScene: string;
-  m_PosBeforeInteriorLoad: [number, number, number];
-  m_SceneSaveFilenameCurrent: string;
-  m_SceneSaveFilenameNextLoad: string;
-  m_SceneLocationLocIDToShow: string;
-  m_GameRandomSeed: number;
-  m_Location: string;
-  m_LastOutdoorScene: string;
+  m_TeleportPlayerSaveGamePosition?: boolean;
+  m_SpawnPointName?: string | null;
+  m_SpawnPointAudio?: string | null;
+  m_ForceSceneOnNextNavMapLoad?: string | null;
+  m_ForceNextSceneLoadTriggerScene?: string | null;
+  m_PosBeforeInteriorLoad?: [number, number, number] | null;
+  m_SceneSaveFilenameCurrent?: string | null;
+  m_SceneSaveFilenameNextLoad?: string | null;
+  m_SceneLocationLocIDToShow?: string | null;
+  m_GameRandomSeed?: number;
+  m_Location?: string | null;
+  m_LastOutdoorScene?: string | null;
 }

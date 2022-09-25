@@ -1,10 +1,10 @@
 
 export default interface BloodLossSaveDataProxy {
-  m_Active: boolean;
-  m_ElapsedHours: number;
-  m_DurationHours: number;
-  m_CausesLocIDs: Array<string>;
-  m_Locations: Array<number>;
-  m_ElapsedHoursList: Array<number>;
-  m_DurationHoursList: Array<number>;
+  m_Active?: boolean;
+  m_ElapsedHours?: number;
+  m_DurationHours?: number;
+  m_CausesLocIDs?: Array<string | null> | null;
+  m_Locations?: Array<number> | null;
+  m_ElapsedHoursList?: Array<number> | null;
+  m_DurationHoursList?: Array<number> | null;
 }

@@ -1,4 +1,4 @@
 
 export default interface Skill_ArcherySaveData {
-  m_Points: number;
+  m_Points?: number;
 }

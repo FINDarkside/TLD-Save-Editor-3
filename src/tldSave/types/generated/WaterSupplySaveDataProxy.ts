@@ -1,4 +1,4 @@
 
 export default interface WaterSupplySaveDataProxy {
-  m_VolumeProxy: number;
+  m_VolumeProxy?: number;
 }

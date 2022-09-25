@@ -1,8 +1,8 @@
 
 export default interface RockCacheInfo {
-  m_Guid: string;
-  m_CustomName: string;
-  m_SceneName: string;
-  m_MapDetailPosition: [number, number, number];
-  m_UserText: string;
+  m_Guid?: string | null;
+  m_CustomName?: string | null;
+  m_SceneName?: string | null;
+  m_MapDetailPosition?: [number, number, number] | null;
+  m_UserText?: string | null;
 }

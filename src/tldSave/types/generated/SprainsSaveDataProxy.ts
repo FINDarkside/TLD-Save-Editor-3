@@ -1,4 +1,4 @@
 
 export default interface SprainsSaveDataProxy {
-  m_HadSprainRiskAffliction: boolean;
+  m_HadSprainRiskAffliction?: boolean;
 }

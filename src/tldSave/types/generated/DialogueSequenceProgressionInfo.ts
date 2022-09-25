@@ -1,5 +1,5 @@
 
 export default interface DialogueSequenceProgressionInfo {
-  m_UniqueId: string;
-  m_CurrentProgressionIndex: number;
+  m_UniqueId?: string | null;
+  m_CurrentProgressionIndex?: number;
 }

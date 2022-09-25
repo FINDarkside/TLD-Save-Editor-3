@@ -1,4 +1,4 @@
 
 export default interface BodyCarrySaveDataProxy {
-  m_Guid: string;
+  m_Guid?: string | null;
 }

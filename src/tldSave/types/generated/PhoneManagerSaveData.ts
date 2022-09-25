@@ -3,7 +3,7 @@ import type PhoneSaveDataInfo from './PhoneSaveDataInfo';
 
 export default interface PhoneManagerSaveData {
   /** @default {List<DialogueSequenceProgressionInfo>} */
-  m_ListDialogueSequenceInfo: DialogueSequenceProgressionInfo[];
+  m_ListDialogueSequenceInfo?: (DialogueSequenceProgressionInfo)[] | null;
   /** @default {List<PhoneSaveDataInfo>} */
-  m_ListPhoneSaveDataInfo: PhoneSaveDataInfo[];
+  m_ListPhoneSaveDataInfo?: (PhoneSaveDataInfo)[] | null;
 }

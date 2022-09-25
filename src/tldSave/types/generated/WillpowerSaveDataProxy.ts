@@ -1,4 +1,4 @@
 
 export default interface WillpowerSaveDataProxy {
-  m_TimeRemainingSecondsProxy: number;
+  m_TimeRemainingSecondsProxy?: number;
 }

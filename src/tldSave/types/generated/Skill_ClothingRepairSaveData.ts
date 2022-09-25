@@ -1,4 +1,4 @@
 
 export default interface Skill_ClothingRepairSaveData {
-  m_Points: number;
+  m_Points?: number;
 }

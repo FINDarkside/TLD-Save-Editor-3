@@ -1,4 +1,4 @@
 
 export default interface NoiseMakerSaveDataProxy {
-  m_ElapsedBurnMinutes: number;
+  m_ElapsedBurnMinutes?: number;
 }

@@ -1,5 +1,5 @@
 
 export default interface MissionObjectiveTableSaveDataProxy {
-  m_ObjectiveName: string;
-  m_MissionGraphNameOwner: string;
+  m_ObjectiveName?: string | null;
+  m_MissionGraphNameOwner?: string | null;
 }

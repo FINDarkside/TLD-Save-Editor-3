@@ -1,5 +1,5 @@
 
 export default interface CollectionManagerSaveData {
-  m_UnlockedCairnsDictSerialized: string;
-  m_UnlockedAuroraSetSerialized: string;
+  m_UnlockedCairnsDictSerialized?: string | null;
+  m_UnlockedAuroraSetSerialized?: string | null;
 }

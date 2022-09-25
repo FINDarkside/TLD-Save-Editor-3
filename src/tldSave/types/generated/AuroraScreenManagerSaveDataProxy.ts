@@ -1,4 +1,4 @@
 
 export default interface AuroraScreenManagerSaveDataProxy {
-  m_AssignedPrefabsSerialized: string;
+  m_AssignedPrefabsSerialized?: string | null;
 }

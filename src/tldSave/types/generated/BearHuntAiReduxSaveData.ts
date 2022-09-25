@@ -1,6 +1,6 @@
 
 export default interface BearHuntAiReduxSaveData {
-  m_BearEarGiven: boolean;
-  m_UseForceBearFleePosition: boolean;
-  m_ForceBearFleePosition: [number, number, number];
+  m_BearEarGiven?: boolean;
+  m_UseForceBearFleePosition?: boolean;
+  m_ForceBearFleePosition?: [number, number, number] | null;
 }

@@ -1,4 +1,4 @@
 
 export default interface ResearchItemSaveData {
-  m_ElapsedHours: number;
+  m_ElapsedHours?: number;
 }

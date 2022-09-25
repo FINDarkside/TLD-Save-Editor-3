@@ -1,7 +1,7 @@
 
 export default interface KnowledgeManagerSaveData {
-  m_TrustDictSerialized: string;
-  m_KnowledgeDictSerialized: string;
-  m_NameRefDictSerialized: string;
-  m_SnowSheltersUnlockedInStory: boolean;
+  m_TrustDictSerialized?: string | null;
+  m_KnowledgeDictSerialized?: string | null;
+  m_NameRefDictSerialized?: string | null;
+  m_SnowSheltersUnlockedInStory?: boolean;
 }

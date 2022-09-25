@@ -1,4 +1,4 @@
 
 export default interface PackManagerGlobalDataProxy {
-  m_IsPackNearbyFlag: boolean;
+  m_IsPackNearbyFlag?: boolean;
 }

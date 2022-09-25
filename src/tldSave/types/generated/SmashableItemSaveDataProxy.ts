@@ -1,4 +1,4 @@
 
 export default interface SmashableItemSaveDataProxy {
-  m_HasBeenSmashed: boolean;
+  m_HasBeenSmashed?: boolean;
 }
