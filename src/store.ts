@@ -16,12 +16,13 @@ const store = {
   currentSave: undefined as undefined | GameSave,
 
   get global() {
-    return this.currentSave?.data?.m_Dict.global;
+    return this.currentSave?.data?.m_Dict?.global;
   },
 
   async loadSave(file: string) {
     const buf = await readFile(file);
     const saveData = tldParser.parse(buf);
+    saveData?.m_Dict?.global?.fatigue?.m_CurrentFatigueProxy;
     this.currentSave = {
       file,
       data: saveData,

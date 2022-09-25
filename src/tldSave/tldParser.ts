@@ -2,7 +2,7 @@ import type InventorySaveDataProxy from './types/generated/InventorySaveDataProx
 import type GlobalSaveGameFormat from './types/generated/GlobalSaveGameFormat';
 import type ConditionSaveDataProxy from './types/generated/ConditionSaveDataProxy';
 import type SlotData from './types/generated/SlotData';
-import { parseArray, parseObject } from './index';
+import { parseArray, parseObject } from './parser';
 import HungerSaveDataProxy from './types/generated/HungerSaveDataProxy';
 import ThirstSaveDataProxy from './types/generated/ThirstSaveDataProxy';
 import FatigueSaveDataProxy from './types/generated/FatigueSaveDataProxy';

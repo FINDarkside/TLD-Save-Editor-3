@@ -196,11 +196,8 @@ import type { Get } from 'type-fest'
 import { computed, PropType } from 'vue';
 import store from 'src/store'
 
-const asd = store.currentSave?.data?.m_Dict.global?.inventory?.items?.[0];
-
+const asd = store.currentSave?.data?.m_Dict?.global?.inventory?.items?.[0];
 type GearItem = NonNullable<typeof asd>
-
-//type GearItem = NonNullable<Get<ReturnType<typeof tldParser['parse']>, 'm_Dict.global.inventory.items.0'>>
 
 const props = defineProps({
   item: Object as (PropType<GearItem>)

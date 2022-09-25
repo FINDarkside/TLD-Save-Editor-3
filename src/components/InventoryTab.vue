@@ -20,7 +20,7 @@
       <v-btn
         variant="outlined"
         @click="deleteItem"
-        v-if="!selectedItem.m_PrefabName.startsWith('GEAR_WaterSupply')"
+        v-if="!selectedItem.m_PrefabName?.startsWith('GEAR_WaterSupply')"
       >Delete</v-btn>
       <ItemView
         v-if="selectedItem"
@@ -38,7 +38,7 @@ import { ref, watch, toRaw } from 'vue';
 import { computed } from '@vue/reactivity';
 import ItemView from './ItemView.vue';
 
-const items = computed(() => store.currentSave?.data?.m_Dict.global?.inventory?.items)
+const items = computed(() => store.currentSave?.data?.m_Dict?.global?.inventory?.items)
 const selectedItem = ref(null as null | NonNullable<typeof items.value>[number])
 
 const deleteItem = () => {
