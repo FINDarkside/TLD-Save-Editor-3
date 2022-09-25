@@ -10,14 +10,7 @@
       :min="0"
       hide-details
     />
-    Weight
-    <v-text-field
-      v-model="gear.m_WeightKG"
-      variant="outlined"
-      hide-details
-      density="compact"
-      type="number"
-    />
+
     <template v-if="gear?.stackable">
       Amount
       <v-text-field
