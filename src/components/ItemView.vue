@@ -193,12 +193,17 @@
 <script setup lang="ts">
 import type tldParser from 'src/tldSave/tldParser'
 import type { Get } from 'type-fest'
-import { computed, PropType, toRaw } from 'vue';
+import { computed, PropType } from 'vue';
+import store from 'src/store'
 
-type GearItem = NonNullable<Get<ReturnType<typeof tldParser['parse']>, 'm_Dict.global.inventory.items.0'>>
+const asd = store.currentSave?.data?.m_Dict.global?.inventory?.items?.[0];
+
+type GearItem = NonNullable<typeof asd>
+
+//type GearItem = NonNullable<Get<ReturnType<typeof tldParser['parse']>, 'm_Dict.global.inventory.items.0'>>
 
 const props = defineProps({
-  item: Object as PropType<GearItem>
+  item: Object as (PropType<GearItem>)
 })
 
 const gear = computed(() => props.item?.gear)
