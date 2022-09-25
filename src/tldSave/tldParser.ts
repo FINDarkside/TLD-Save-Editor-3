@@ -98,7 +98,11 @@ const tldParser = parseObject({
   .compressed()
   .withFields<SlotData>();
 
+const slotParser = parseObject().json().compressed().withFields<SlotData>();
+
 //  const save = tldParser.parse(Buffer.alloc(1));
 // save?.m_Dict.global.condition;
 
 export default tldParser;
+
+export { slotParser };

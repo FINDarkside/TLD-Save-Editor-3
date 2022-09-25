@@ -3,9 +3,10 @@
     <v-main :class="$style.app">
       <div :class="$style.topBar">
         <v-select
-          :items="items"
-          item-value="value"
+          v-model="selectedSave"
+          :items="store.availableSaves"
           item-title="name"
+          item-value="file"
           label="Current save"
           variant="plain"
           flat
@@ -14,7 +15,7 @@
         <v-btn @click="store.saveCurrent()">Save</v-btn>
       </div>
 
-      <TabSwitch />
+      <TabSwitch v-if="store.currentSave" />
 
 
     </v-main>
@@ -22,21 +23,19 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, watch } from 'vue'
+import { effect, onMounted, ref, watch } from 'vue'
 import store from './store'
 import TabSwitch from './components/TabSwitch.vue';
 
-const tab = ref(null)
+const selectedSave = ref<undefined | string>(undefined)
 
-const items = ref([{ name: 'Save 1', value: 'file1' }, { name: 'Save 1', value: 'file2' }])
-const select = ref<undefined | string>()
+effect(() => {
+  if (selectedSave.value)
+    store.loadSave(selectedSave.value)
+})
 
 onMounted(() => {
-  console.log('asd')
-  if (!store.currentSave) {
-    console.log('MOUNT');
-    store.loadSave('C:/Users/FINDarkside/AppData/Local/Hinterland/TheLongDark/sandbox1')
-  }
+  store.refreshAvailableSaves()
 });
 
 </script>
