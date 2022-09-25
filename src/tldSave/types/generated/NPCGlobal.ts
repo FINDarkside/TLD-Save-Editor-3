@@ -1,8 +1,4 @@
 
-enum CollisionDetectionMode {
-  Discrete = 'Discrete',
-  Continuous = 'Continuous',
-  ContinuousDynamic = 'ContinuousDynamic',
-  ContinuousSpeculative = 'ContinuousSpeculative'
+export default interface NPCGlobalSaveData {
+  m_ActiveGuid: string;
 }
-export default CollisionDetectionMode;

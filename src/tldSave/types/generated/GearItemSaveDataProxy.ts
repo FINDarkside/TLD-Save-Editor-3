@@ -52,4 +52,5 @@ export default interface GearItemSaveDataProxy {
   m_PowderItemSerialized: string;
   m_MillableSerialized: string;
   m_SprayPaintCanSerialized: string;
+  m_NoiseMakerSerialized: string;
 }
