@@ -1,45 +1,88 @@
 <template>
-  <div :class="$style.container">
-    <v-list :class="$style.itemListPanel">
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :value="item"
-        :active="selectedItem === item"
-        @click="selectedItem = item"
-      >
-        <v-list-item-title> {{item?.m_PrefabName}}</v-list-item-title>
-      </v-list-item>
-    </v-list>
-
-    <div
-      :class="$style.itemContainer"
-      v-if="selectedItem"
-    >
-      <!-- Don't allow deleting water supplys because user can't get them back -->
+  <div class="overflow-hidden d-flex flex-column">
+    <div :class="$style.toolbar">
+      <v-select
+        v-model="selectedItemToAdd"
+        :items="availableItems"
+        item-title="name"
+        label="Item to add"
+        variant="plain"
+        flat
+        hide-details
+        return-object
+      ></v-select>
       <v-btn
+        flat
         variant="outlined"
-        @click="deleteItem"
-        v-if="!selectedItem.m_PrefabName?.startsWith('GEAR_WaterSupply')"
-      >Delete</v-btn>
-      <ItemView
-        v-if="selectedItem"
-        :item="selectedItem"
-      >
-      </ItemView>
+        @click="addItem"
+      >Add item</v-btn>
     </div>
 
+    <div :class="$style.container">
+      <v-list :class="$style.itemListPanel">
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :value="item"
+          :active="selectedItem === item"
+          @click="selectedItem = item"
+        >
+          <v-list-item-title> {{item?.m_PrefabName}}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+
+      <div
+        :class="$style.itemContainer"
+        v-if="selectedItem"
+      >
+        <!-- Don't allow deleting water supplys because user can't get them back -->
+        <v-btn
+          variant="outlined"
+          @click="deleteItem"
+          v-if="!selectedItem.m_PrefabName?.startsWith('GEAR_WaterSupply')"
+        >Delete</v-btn>
+        <ItemView
+          v-if="selectedItem"
+          :item="selectedItem"
+        >
+        </ItemView>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import store from '../store'
-import { ref, watch, toRaw } from 'vue';
-import { computed } from '@vue/reactivity';
+import { PartialDeep } from 'type-fest'
+import { ref } from 'vue';
+import { computed, toRaw } from 'vue';
 import ItemView from './ItemView.vue';
+import availableItems from 'src/tldSave/availableItems';
 
+const selectedItemToAdd = ref<typeof availableItems[number]>()
 const items = computed(() => store.currentSave?.data?.m_Dict?.global?.inventory?.items)
 const selectedItem = ref(null as null | NonNullable<typeof items.value>[number])
+
+function addItem() {
+  const itemToAdd = toRaw(selectedItemToAdd.value);
+  console.log(itemToAdd);
+  if (!itemToAdd) return
+  const newItem: PartialDeep<NonNullable<typeof items.value>[0]> = {
+    m_PrefabName: itemToAdd.name,
+    gear: {
+      ...structuredClone(itemToAdd.defaultData),
+      m_Rotation: [0, 0, 0, 0],
+      m_Position: [0, 0, 0],
+      m_NormalizedCondition: 1,
+      // TODO: Global.TimeOfDay.m_HoursPlayedNotPausedProxy
+      m_HoursPlayed: 0,
+      m_InstanceIDProxy: Math.round(Math.random() * 2147483647),
+    }
+  }
+  console.log(newItem)
+  store.global?.inventory?.items?.push(newItem)
+}
 
 const deleteItem = () => {
   if (!selectedItem.value || !items.value) return;
@@ -52,6 +95,12 @@ const deleteItem = () => {
 </script>
 
 <style lang="scss" module>
+.toolbar {
+  border-bottom: 1px solid #333;
+  padding: 0.5em 0;
+  display: flex;
+}
+
 .container {
   overflow-y: hidden;
   display: flex;

@@ -191,8 +191,6 @@
 </template>
 
 <script setup lang="ts">
-import type tldParser from 'src/tldSave/tldParser'
-import type { Get } from 'type-fest'
 import { computed, PropType } from 'vue';
 import store from 'src/store'
 

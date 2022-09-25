@@ -1,6 +1,3 @@
-import tldParser from './tldParser';
-import GearItemSaveDataProxy from './types/generated/GearItemSaveDataProxy';
-import { Get } from 'type-fest';
 import LiquidQuality from './types/generated/enums/LiquidQuality';
 import store from 'src/store';
 
@@ -29,7 +26,7 @@ const createClothing = (name: string) => ({
   category: ItemCategory.Clothing,
 });
 
-const itemInfo: ItemInfo[] = [
+const availableItems: ItemInfo[] = [
   {
     name: 'GEAR_BottleAntibiotics',
     category: ItemCategory.FirstAid,
@@ -124,3 +121,5 @@ const itemInfo: ItemInfo[] = [
     },
   },
 ];
+
+export default availableItems;

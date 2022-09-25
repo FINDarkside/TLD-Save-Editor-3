@@ -6,7 +6,7 @@ interface ObjectParserArg {
 }
 
 type ObjParsedType<T extends ObjectParserArg> = {
-  [key in keyof T]: ReturnType<T[key]['parse']>;
+  [key in keyof T]?: ReturnType<T[key]['parse']>;
 };
 
 type ObjSerializedType<T extends ObjectParserArg> = {

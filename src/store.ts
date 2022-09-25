@@ -52,8 +52,12 @@ const store = {
     this.availableSaves = slots;
   },
   async loadSave(file: string) {
+    console.time('read save');
     const buf = await readFile(file);
+    console.timeEnd('read save');
+    console.time('parse save');
     const saveData = tldParser.parse(buf);
+    console.timeEnd('parse save');
     saveData?.m_Dict?.global?.fatigue?.m_CurrentFatigueProxy;
     this.currentSave = {
       file,

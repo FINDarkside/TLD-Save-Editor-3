@@ -10,7 +10,7 @@
     <template v-for="(tab, i) in tabs">
       <component
         :is="tab.component"
-        v-show="i === store.selectedTab"
+        v-if="i === store.selectedTab"
       ></component>
     </template>
   </div>
