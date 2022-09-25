@@ -1,13 +1,16 @@
 <template>
 
   <div :class="$style.container">
-    <v-tabs v-model="selectedTab">
+    <v-tabs
+      v-model="store.selectedTab"
+      :class="$style.tabs"
+    >
       <v-tab v-for="tab in tabs">{{ tab.name }}</v-tab>
     </v-tabs>
     <template v-for="(tab, i) in tabs">
       <component
         :is="tab.component"
-        v-show="i === selectedTab"
+        v-show="i === store.selectedTab"
       ></component>
     </template>
   </div>
@@ -15,14 +18,14 @@
 
 <script setup lang="ts">
 import { h, shallowRef, ref, watch } from 'vue'
-import InventoryTab from './InventoryTab.vue';
-import PlayerTab from './PlayerTab.vue';
+import InventoryTab from './InventoryTab.vue'
+import PlayerTab from './PlayerTab.vue'
+import store from 'src/store'
 
 const tabs = shallowRef([
   { name: 'Player', component: PlayerTab },
   { name: 'Inventory', component: InventoryTab },
 ])
-const selectedTab = ref(0)
 
 </script>
 
@@ -31,5 +34,10 @@ const selectedTab = ref(0)
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  border-top: 1px solid #333;
+}
+
+.tabs {
+  border-bottom: 1px solid #333;
 }
 </style>

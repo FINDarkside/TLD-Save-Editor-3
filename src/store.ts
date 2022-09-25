@@ -11,6 +11,8 @@ interface GameSave {
 }
 
 const store = {
+  selectedTab: 0,
+
   currentSave: undefined as undefined | GameSave,
 
   get global() {

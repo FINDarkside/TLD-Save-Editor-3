@@ -198,7 +198,7 @@
 </template>
 
 <script setup lang="ts">
-import tldParser from 'src/tldSave/tldParser'
+import type tldParser from 'src/tldSave/tldParser'
 import type { Get } from 'type-fest'
 import { computed, PropType, toRaw } from 'vue';
 
@@ -225,7 +225,7 @@ const gearJson = computed({
 <style module>
 .container {
   flex: 1;
-  margin: 2em;
+  margin-top: 1em;
   display: grid;
   grid-template-columns: max-content auto;
   grid-gap: 0.6em 3em;

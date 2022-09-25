@@ -7,7 +7,8 @@
           item-value="value"
           item-title="name"
           label="Current save"
-          variant="underlined"
+          variant="plain"
+          flat
           hide-details
         ></v-select>
         <v-btn @click="store.saveCurrent()">Save</v-btn>

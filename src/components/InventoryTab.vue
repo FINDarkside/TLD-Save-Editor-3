@@ -5,19 +5,30 @@
         v-for="(item, i) in items"
         :key="i"
         :value="item"
-        :active="selectedItem === item.value"
-        @click="selectedItem = item.value"
+        :active="selectedItem === item"
+        @click="selectedItem = item"
       >
-        <v-list-item-title> {{item.title}}</v-list-item-title>
+        <v-list-item-title> {{item?.m_PrefabName}}</v-list-item-title>
       </v-list-item>
     </v-list>
 
-    <ItemView
-      v-if="selectedItem"
+    <div
       :class="$style.itemContainer"
-      :item="selectedItem"
+      v-if="selectedItem"
     >
-    </ItemView>
+      <!-- Don't allow deleting water supplys because user can't get them back -->
+      <v-btn
+        variant="outlined"
+        @click="deleteItem"
+        v-if="!selectedItem.m_PrefabName.startsWith('GEAR_WaterSupply')"
+      >Delete</v-btn>
+      <ItemView
+        v-if="selectedItem"
+        :item="selectedItem"
+      >
+      </ItemView>
+    </div>
+
   </div>
 </template>
 
@@ -27,8 +38,16 @@ import { ref, watch, toRaw } from 'vue';
 import { computed } from '@vue/reactivity';
 import ItemView from './ItemView.vue';
 
-const items = computed(() => store.currentSave?.data?.m_Dict.global?.inventory?.items?.map((item) => ({ title: item?.m_PrefabName, value: item })))
-const selectedItem = ref(null as null | NonNullable<typeof items.value>[number]['value'])
+const items = computed(() => store.currentSave?.data?.m_Dict.global?.inventory?.items)
+const selectedItem = ref(null as null | NonNullable<typeof items.value>[number])
+
+const deleteItem = () => {
+  if (!selectedItem.value || !items.value) return;
+  const index = items.value.indexOf(selectedItem.value);
+  if (index < 0) return;
+  items.value.splice(index, 1)
+  selectedItem.value = null;
+}
 
 </script>
 

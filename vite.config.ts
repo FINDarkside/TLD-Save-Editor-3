@@ -46,6 +46,9 @@ export default defineConfig({
     }),
     vuetify({ autoImport: true }),
   ],
+  resolve: {
+    alias: { src: path.resolve('src/') },
+  },
   server: process.env.VSCODE_DEBUG
     ? {
         host: pkg.debug.env.VITE_DEV_SERVER_HOSTNAME,
