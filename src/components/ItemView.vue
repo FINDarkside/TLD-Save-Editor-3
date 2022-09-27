@@ -178,13 +178,21 @@
         hide-details
       />
     </template>
+    Gear name
+    <v-text-field
+      :value="item?.m_PrefabName"
+      variant="outlined"
+      hide-details
+      density="compact"
+    />
     JSON
     <v-textarea
       v-model="gearJson"
       variant="outlined"
       hide-details
       density="compact"
-      :row-height="20"
+      :row-height="200"
+      :class="$style.jsonArea"
     >
     </v-textarea>
   </div>
@@ -215,7 +223,7 @@ const gearJson = computed({
 
 </script>
 
-<style module>
+<style module lang="scss">
 .container {
   flex: 1;
   margin-top: 1em;
@@ -228,5 +236,13 @@ const gearJson = computed({
 
 .input {
   max-width: 20em;
+}
+
+.jsonArea {
+  height: 30em;
+
+  textarea {
+    height: 100%;
+  }
 }
 </style>

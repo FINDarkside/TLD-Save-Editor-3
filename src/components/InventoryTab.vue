@@ -8,12 +8,13 @@
         label="Item to add"
         variant="plain"
         flat
+        single-line
         hide-details
         return-object
       ></v-select>
       <v-btn
+        :class="$style.addItemButton"
         flat
-        variant="outlined"
         @click="addItem"
       >Add item</v-btn>
     </div>
@@ -78,6 +79,7 @@ function addItem() {
       // TODO: Global.TimeOfDay.m_HoursPlayedNotPausedProxy
       m_HoursPlayed: 0,
       m_InstanceIDProxy: Math.round(Math.random() * 2147483647),
+      m_GearItemSaveVersion: 4
     }
   }
   console.log(newItem)
@@ -97,7 +99,6 @@ const deleteItem = () => {
 <style lang="scss" module>
 .toolbar {
   border-bottom: 1px solid #333;
-  padding: 0.5em 0;
   display: flex;
 }
 
@@ -116,5 +117,9 @@ const deleteItem = () => {
   margin: 2em;
   min-width: 0;
   flex-grow: 1;
+}
+
+.addItemButton {
+  height: 100% !important;
 }
 </style>

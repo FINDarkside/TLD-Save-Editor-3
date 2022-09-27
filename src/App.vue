@@ -12,7 +12,7 @@
           flat
           hide-details
         ></v-select>
-        <v-btn @click="store.saveCurrent()">Save</v-btn>
+        <v-btn @click="store.saveCurrent()" flat>Save</v-btn>
       </div>
 
       <TabSwitch v-if="store.currentSave" />
