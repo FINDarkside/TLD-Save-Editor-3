@@ -2,8 +2,19 @@
   <div class="overflow-hidden d-flex flex-column">
     <div :class="$style.toolbar">
       <v-select
+        v-model="selectedItemCategory"
+        :items="availableCategories"
+        item-title="name"
+        label="Category"
+        variant="plain"
+        flat
+        single-line
+        hide-details
+        return-object
+      ></v-select>
+      <v-select
         v-model="selectedItemToAdd"
-        :items="availableItems"
+        :items="availableItemsToShow"
         item-title="name"
         label="Item to add"
         variant="plain"
@@ -56,14 +67,20 @@
 <script setup lang="ts">
 import store from '../store'
 import { PartialDeep } from 'type-fest'
-import { ref } from 'vue';
-import { computed, toRaw } from 'vue';
-import ItemView from './ItemView.vue';
-import availableItems from 'src/tldSave/availableItems';
+import { ref } from 'vue'
+import { computed, toRaw } from 'vue'
+import ItemView from './ItemView.vue'
+import availableItems from 'src/tldSave/availableItems'
+import { ItemCategory } from 'src/tldSave/availableItems'
 
 const selectedItemToAdd = ref<typeof availableItems[number]>()
 const items = computed(() => store.currentSave?.data?.m_Dict?.global?.inventory?.items)
 const selectedItem = ref(null as null | NonNullable<typeof items.value>[number])
+const selectedItemCategory = ref<ItemCategory>(ItemCategory.FirstAid)
+
+const availableCategories = Object.values(ItemCategory)
+const availableItemsToShow = computed(() => availableItems.filter(item => item.category === selectedItemCategory.value))
+
 
 function addItem() {
   const itemToAdd = toRaw(selectedItemToAdd.value);
@@ -84,6 +101,7 @@ function addItem() {
   }
   console.log(newItem)
   store.global?.inventory?.items?.push(newItem)
+  selectedItem.value = newItem
 }
 
 const deleteItem = () => {
