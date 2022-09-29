@@ -2,7 +2,7 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  "appId": "YourAppID",
+  "appId": "TLD-Save-Editor-3",
   "asar": true,
   "directories": {
     "output": "release/${version}"
@@ -28,9 +28,9 @@
     "artifactName": "${productName}_${version}.${ext}"
   },
   "nsis": {
-    "oneClick": false,
+    "oneClick": true,
     "perMachine": false,
-    "allowToChangeInstallationDirectory": true,
-    "deleteAppDataOnUninstall": false
+    "allowToChangeInstallationDirectory": false,
+    "deleteAppDataOnUninstall": true
   }
 }
