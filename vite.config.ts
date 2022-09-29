@@ -47,7 +47,7 @@ export default defineConfig({
     vuetify({ autoImport: true }),
   ],
   resolve: {
-    alias: { src: path.resolve('src/') },
+    alias: { src: path.resolve('src/'), locales: path.resolve('locales/') },
   },
   server: process.env.VSCODE_DEBUG
     ? {

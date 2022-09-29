@@ -15,7 +15,7 @@
       <v-select
         v-model="selectedItemToAdd"
         :items="availableItemsToShow"
-        item-title="name"
+        item-title="displayName"
         label="Item to add"
         variant="plain"
         flat
@@ -39,7 +39,7 @@
           :active="selectedItem === item"
           @click="selectedItem = item"
         >
-          <v-list-item-title> {{item?.m_PrefabName}}</v-list-item-title>
+          <v-list-item-title> {{getGearDisplayName(item?.m_PrefabName)}}</v-list-item-title>
         </v-list-item>
       </v-list>
 
@@ -69,17 +69,28 @@ import store from '../store'
 import { PartialDeep } from 'type-fest'
 import { ref } from 'vue'
 import { computed, toRaw } from 'vue'
+import { useI18n } from 'vue-i18n';
 import ItemView from './ItemView.vue'
 import availableItems from 'src/tldSave/availableItems'
 import { ItemCategory } from 'src/tldSave/availableItems'
 
-const selectedItemToAdd = ref<typeof availableItems[number]>()
+const { t } = useI18n()
+
+const selectedItemToAdd = ref<typeof availableItems[number] & { displayName: string }>()
 const items = computed(() => store.currentSave?.data?.m_Dict?.global?.inventory?.items)
 const selectedItem = ref(null as null | NonNullable<typeof items.value>[number])
 const selectedItemCategory = ref<ItemCategory>(ItemCategory.FirstAid)
 
 const availableCategories = Object.values(ItemCategory)
-const availableItemsToShow = computed(() => availableItems.filter(item => item.category === selectedItemCategory.value))
+const availableItemsToShow = computed(() => availableItems
+  .filter(item => item.category === selectedItemCategory.value)
+  .map(item => ({ ...item, displayName: getGearDisplayName(item.name) }))
+)
+
+function getGearDisplayName(name: Optional<string>) {
+  if (name == null) return null;
+  return t(`gear.${name}`, {}, { default: name })
+}
 
 
 function addItem() {
