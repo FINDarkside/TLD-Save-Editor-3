@@ -33,7 +33,7 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Release Files
         run: npm run build
