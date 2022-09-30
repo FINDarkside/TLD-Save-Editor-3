@@ -44,7 +44,13 @@ export class ObjectParser<
 
   private preProcessData(data: any) {
     let result = data;
-    if (this.isCompressed) result = lzf.decompress(result).toString();
+
+    if (this.isCompressed) {
+      console.time('decompress');
+      result = lzf.decompress(result).toString();
+      console.timeEnd('decompress');
+    }
+
     if (this.isJson) {
       // FIXME: Handle this better
       result = JSON.parse((result as string).replaceAll('Infinity', '0'));

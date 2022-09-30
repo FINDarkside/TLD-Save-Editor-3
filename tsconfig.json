@@ -14,10 +14,8 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "allowJs": true,
-    "maxNodeModuleJsDepth": 5,
+    "maxNodeModuleJsDepth": 5
   },
-  "include": ["src"],
-  "references": [
-    { "path": "./tsconfig.node.json" }
-  ]
+  "include": ["src", "locales"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
