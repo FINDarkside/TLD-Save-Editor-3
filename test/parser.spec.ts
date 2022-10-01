@@ -5,6 +5,10 @@ type ObjWithInfinity = {
   val: number;
 };
 
+type ObjWithBigNumber = {
+  val: number | bigint;
+};
+
 describe('Parser', () => {
   test('Parses Infinity correctly', () => {
     const parser = parseObject().json().withFields<ObjWithInfinity>();
@@ -40,5 +44,23 @@ describe('Parser', () => {
     const parser = parseObject().json().withFields<ObjWithInfinity>();
     const json = parser.serialize({ val: Number.NaN });
     expect(json).toEqual('{"val":NaN}');
+  });
+
+  test('Parses big numbers correctly', () => {
+    const parser = parseObject().json().withFields<ObjWithInfinity>();
+    const json = parser.parse('{"val":9223372036854775807}');
+    expect(json?.val).toEqual(BigInt('9223372036854775807'));
+  });
+
+  test("Doesn't parse small numbers to BigInt", () => {
+    const parser = parseObject().json().withFields<ObjWithInfinity>();
+    const json = parser.parse('{"val":34}');
+    expect(json?.val).toBeTypeOf('number');
+  });
+
+  test('Serializes big numbers correctly', () => {
+    const parser = parseObject().json().withFields<ObjWithInfinity>();
+    const json = parser.serialize({ val: BigInt('9223372036854775807') });
+    expect(json).toEqual('{"val":9223372036854775807}');
   });
 });
