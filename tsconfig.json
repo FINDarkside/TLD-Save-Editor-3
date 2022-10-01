@@ -16,6 +16,6 @@
     "allowJs": true,
     "maxNodeModuleJsDepth": 5
   },
-  "include": ["src", "locales"],
+  "include": ["src", "locales", "test"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

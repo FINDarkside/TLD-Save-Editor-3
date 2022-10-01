@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build && electron-builder",
-    "tsc": "vue-tsc --noEmit"
+    "tsc": "vue-tsc --noEmit",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "main": "dist/electron/main/index.js",
   "dependencies": {
@@ -32,6 +34,7 @@
     "vite": "^3.0.8",
     "vite-plugin-electron": "^0.9.3",
     "vite-plugin-vuetify": "^1.0.0-alpha.12",
+    "vitest": "^0.23.4",
     "vue": "^3.2.37",
     "vue-cli-plugin-vuetify": "~2.5.8",
     "vue-tsc": "^0.40.1"

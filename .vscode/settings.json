@@ -10,5 +10,6 @@
   "html.format.wrapAttributes": "force-expand-multiline",
   "prettier.singleQuote": true,
   "typescript.preferences.quoteStyle": "single",
-  "javascript.preferences.quoteStyle": "single"
+  "javascript.preferences.quoteStyle": "single",
+  "vitest.enable": true
 }
