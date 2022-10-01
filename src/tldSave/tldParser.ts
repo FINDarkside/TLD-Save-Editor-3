@@ -2,7 +2,7 @@ import type InventorySaveDataProxy from './types/generated/InventorySaveDataProx
 import type GlobalSaveGameFormat from './types/generated/GlobalSaveGameFormat';
 import type ConditionSaveDataProxy from './types/generated/ConditionSaveDataProxy';
 import type SlotData from './types/generated/SlotData';
-import { parseArray, parseObject } from './parser';
+import { parseArray, parseObject, parseValue } from './parser';
 import HungerSaveDataProxy from './types/generated/HungerSaveDataProxy';
 import ThirstSaveDataProxy from './types/generated/ThirstSaveDataProxy';
 import FatigueSaveDataProxy from './types/generated/FatigueSaveDataProxy';
@@ -113,6 +113,14 @@ import FearSaveDataProxy from './types/generated/FearSaveDataProxy';
 import AnxietySaveDataProxy from './types/generated/AnxietySaveDataProxy';
 import SuffocatingSaveDataProxy from './types/generated/SuffocatingSaveDataProxy';
 import SceneManagerSaveDataProxy from './types/generated/SceneManagerSaveDataProxy';
+import MissionObjectIdentifierSaveProxy from './types/generated/MissionObjectIdentifierSaveProxy';
+import OwnershipOverrideSaveDataProxy from './types/generated/OwnershipOverrideSaveDataProxy';
+import InspectSaveDataProxy from './types/generated/InspectSaveDataProxy';
+import RigidBodySaveData from './types/generated/RigidBodySaveData';
+import MissionServicesManagerSaveProxy from './types/generated/MissionServicesManagerSaveProxy';
+import MissionObjectiveTableSaveDataProxy from './types/generated/MissionObjectiveTableSaveDataProxy';
+import KnowledgeCateogry from './types/generated/enums/KnowledgeCateogry';
+import HighResolutionTimerSaveDataProxy from './types/generated/HighResolutionTimerSaveDataProxy';
 
 const inventoryParser = parseObject({
   items: parseArray(
@@ -133,18 +141,18 @@ const inventoryParser = parseObject({
         snare: parseObject().from('m_SnareItemSerialized').json().withFields<SnareItemSaveDataProxy>(),
         inProgress: parseObject().from('m_InProgressItemSerialized').json().withFields<InProgressCraftItemSaveDataProxy>(),
         torch: parseObject().from('m_TorchItemSerialized').json().withFields<TorchItemSaveDataProxy>(),
-        // m_CollectibleNoteSerialized
+        // m_CollectibleNoteSerialized not used
         evolve: parseObject().from('m_EvolveItemSerialized').json().withFields<EvolveItemSaveData>(),
-        // m_ObjectGuidSerialized
-        // m_MissionObjectSerialized
+        // m_ObjectGuidSerialized is just a string
+        missionObject: parseValue<MissionObjectIdentifierSaveProxy[]>().from('m_MissionObjectSerialized').json(),
         research: parseObject().from('m_ResearchItemSerialized').json().withFields<ResearchItemSaveData>(),
-        // ownership
+        ownership: parseObject().from('m_OwnershipOverrideSerialized').json().withFields<OwnershipOverrideSaveDataProxy>(),
         bodyHarvest: parseObject().from('m_BodyHarvestSerialized').json().withFields<BodyHarvestSaveDataProxy>(),
         cookingPot: parseObject().from('m_CookingPotItemSerialized').json().withFields<CookingPotItemSaveDataProxy>(),
-        // m_PlacePointGuidSerialized
-        // m_PlacePointNameSerialized
-        // m_InspectSerialized
-        // m_RigidBodySerialized
+        // m_PlacePointGuidSerialized is just a string
+        // m_PlacePointNameSerialized is just a string
+        inspect: parseObject().from('m_InspectSerialized').json().withFields<InspectSaveDataProxy>(),
+        rigidBody: parseObject().from('m_RigidBodySerialized').json().withFields<RigidBodySaveData>(),
         powder: parseObject().from('m_PowderItemSerialized').json().withFields<PowderItemSaveDataProxy>(),
         millable: parseObject().from('m_MillableSerialized').json().withFields<MillableSaveDataProxy>(),
         sprayPaint: parseObject().from('m_SprayPaintCanSerialized').json().withFields<SprayPaintCanItemSaveDataProxy>(),
@@ -193,8 +201,18 @@ const tldParser = parseObject({
         .json()
         .withFields<WeatherTransitionSaveDataProxy>(),
       encumber: parseObject().from('m_Encumber_Serialized').json().withFields<EncumberSaveDataProxy>(),
-      // m_SandboxManagerSerialized is moved to saveSlotInfo
-      // m_StoryManagerSerialized is moved to saveSlotInfo
+      sandboxManager: parseObject({
+        globalBlackBoard: parseObject().from('m_SerializedGlobalBlackboard').json(),
+      })
+        .from('m_SandboxManagerSerialized')
+        .json()
+        .withFields<MissionServicesManagerSaveProxy>(),
+      storyManager: parseObject({
+        globalBlackBoard: parseObject().from('m_SerializedGlobalBlackboard').json(),
+      })
+        .from('m_StoryManagerSerialized')
+        .json()
+        .withFields<MissionServicesManagerSaveProxy>(),
       player: parseObject().from('m_PlayerManagerSerialized').json().withFields<PlayerManagerSaveDataProxy>(),
       playerClimbRope: parseObject().from('m_PlayerClimbRopeSerialized').json().withFields<PlayerClimbRopeProxy>(),
       playerSkills: parseObject().from('m_PlayerSkillsSerialized').json().withFields<PlayerSkillsSaveData>(),
@@ -258,8 +276,7 @@ const tldParser = parseObject({
         .from('m_SkillsManagerSerialized')
         .json()
         .withFields<SkillsManagerSaveData>(),
-      // ---------------------  Didn't work with below this commented out
-      // TODO: m_LockCompanionsSerialized Refactor arrayParser to support parsing json to string[]
+      lockCompanions: parseValue<string[]>().from('m_LockCompanionsSerialized').json(),
       featsEnabled: parseObject().from('m_FeatsEnabledSerialized').json().withFields<FeatEnabledTrackerSaveData>(),
       trustManager: parseObject().from('m_TrustManagerSerialized').json().withFields<TrustManagerSaveData>(),
       // TODO: Parse trust stuff
@@ -267,16 +284,31 @@ const tldParser = parseObject({
       mapData: parseObject().from('m_MapDataSerialized').json().withFields<MapSaveData>(),
       // m_BearHuntSerialized deprecated
       bearHuntRedux: parseObject().from('m_BearHuntReduxSerialized').json().withFields<BearHuntReduxSaveData>(),
-      // TODO: Deserialize dictionarys
-      knowledgeManager: parseObject().from('m_KnowledgeManagerSerialized').json().withFields<KnowledgeManagerSaveData>(),
-      // TODO: deserialize string[] m_UnlockedBlueprintsSerialized
-      // TODO: Deserialize Dictionary<int, string> cairns, string[] auroras
-      collectionManager: parseObject().from('m_CollectionManagerSerialized').json().withFields<CollectionManagerSaveData>(),
-      // TODO: Deserialize m_AssignedPrefabsSerialized
-      auroraScreenManager: parseObject().from('m_AuroraScreenManagerSerialized').json().withFields<AuroraScreenManagerSaveDataProxy>(),
+      knowledgeManager: parseObject({
+        trust: parseValue<Record<string, string>>().from('m_TrustDictSerialized').json(),
+        knowledge: parseValue<Record<string, KnowledgeCateogry>>().from('m_KnowledgeDictSerialized').json(),
+        nameRef: parseValue<Record<string, string>>().from('m_NameRefDictSerialized').json(),
+      })
+        .from('m_KnowledgeManagerSerialized')
+        .json()
+        .withFields<KnowledgeManagerSaveData>(),
+      unlockedBlueprints: parseValue<string[]>().from('m_UnlockedBlueprintsSerialized').json(),
+      // TODO: Deserialize Dictionary<int, string> cairns (invalid json)
+      collectionManager: parseObject({
+        unlockedAuroraSet: parseValue<string[]>().from('m_UnlockedAuroraSetSerialized').json(),
+      })
+        .from('m_CollectionManagerSerialized')
+        .json()
+        .withFields<CollectionManagerSaveData>(),
+      auroraScreenManager: parseObject({
+        assignedPrefabs: parseValue<Record<string, string>>().from('m_AssignedPrefabsSerialized').json(),
+      })
+        .from('m_AuroraScreenManagerSerialized')
+        .json()
+        .withFields<AuroraScreenManagerSaveDataProxy>(),
       storyMission: parseObject().from('m_StoryMissionDataSerialized').json().withFields<StoryMissionSaveData>(),
       phoneManager: parseObject().from('m_PhoneManagerSerialized').json().withFields<PhoneManagerSaveData>(),
-      // TODO: Deserialize m_MissionObjectiveTableSerialized
+      missionObjectiveTable: parseValue<MissionObjectiveTableSaveDataProxy[]>().from('m_MissionObjectiveTableSerialized').json(),
       bodyCarry: parseObject().from('m_BodyCarrySerialized').json().withFields<BodyCarrySaveDataProxy>(),
       npcGlobal: parseObject().from('m_NPCGlobalSerialized').json().withFields<NPCGlobalSaveData>(),
       packManagerGlobal: parseObject().from('m_PackManagerGlobalSerialized').json().withFields<PackManagerGlobalDataProxy>(),
@@ -288,7 +320,7 @@ const tldParser = parseObject({
       anxiety: parseObject().from('m_AnxietySerialized').json().withFields<AnxietySaveDataProxy>(),
       suffocating: parseObject().from('m_SuffocatingSerialized').json().withFields<SuffocatingSaveDataProxy>(),
       // TODO: Needs bigint support
-      // highResolutionTimer: parseObject().from('m_HighResolutionTimerSerialized').json().withFields<HighResolutionTimerSaveDataProxy>(),
+      highResolutionTimer: parseValue<HighResolutionTimerSaveDataProxy>().from('m_HighResolutionTimerSerialized').json(),
       sceneManager: parseObject().from('m_SceneManagerSerialized').json().withFields<SceneManagerSaveDataProxy>(),
       // TODO: m_NotificationFlagSerialized has raw GearItem?
     })

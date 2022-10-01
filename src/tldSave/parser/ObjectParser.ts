@@ -40,6 +40,7 @@ export class ObjectParser<
       const valueKey = parser.fromField || key;
       const value = obj[valueKey];
       result[key] = parser.parse(value, options);
+      if (parser.fromField) delete result[parser.fromField];
     }
     return result as CastAny<ExtraFields, {}> & ObjParsedType<T>;
   }

@@ -15,7 +15,6 @@ const nanRegex = new RegExp(`"${nanToken}"`, 'g');
 function parse(json?: string) {
   if (!json) return json;
   // We could use JSON5 but it's over 100% slower than this
-  console.time('regex');
   const preProcessedJson = json
     .replaceAll(/("[A-Za-z_@0-9]+"): *Infinity/g, `\$1:"${infinityToken}"`)
     .replaceAll(
@@ -27,7 +26,6 @@ function parse(json?: string) {
       // Have to use token with NaN
       `\$1:"${nanToken}"`
     );
-  console.timeEnd('regex');
   return JSONbigNative.parse(preProcessedJson, (key: string, value: any) => {
     if (value === nanToken) return NaN;
     if (value === infinityToken) return Infinity;
