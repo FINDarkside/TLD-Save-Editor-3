@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { rmSync } from 'fs';
 import path from 'path';
 import { defineConfig } from 'vite';
@@ -55,4 +56,13 @@ export default defineConfig({
         port: pkg.debug.env.VITE_DEV_SERVER_PORT,
       }
     : undefined,
+  test: {
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/cypress/**',
+      '**/.{idea,git,cache,output,temp}/**',
+      '**/electron/**',
+    ],
+  },
 });
