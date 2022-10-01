@@ -1,0 +1,42 @@
+import type AiMode from './enums/AiMode';
+import type DamageSource from './enums/DamageSource';
+
+export default interface BaseAiDataProxy {
+  m_HoursPlayed?: number;
+  m_TimeInModeSeconds?: number;
+  m_TimeInModeTODHours?: number;
+  m_StartMode?: AiMode;
+  m_CurrentMode?: AiMode;
+  m_PreviousMode?: AiMode;
+  m_SpawnPos?: [number, number, number] | null;
+  m_CurrentHP?: number;
+  m_BleedingOut?: boolean;
+  m_ElapsedBleedingOutMinutes?: number;
+  m_DeathAfterBleeingOutMinutes?: number;
+  m_Waypoints?: Array<[number, number, number] | null> | null;
+  m_TargetWaypointIndex?: number;
+  m_SleepTimeHours?: number;
+  m_Wounded?: boolean;
+  m_ElapsedWoundedMinutes?: number;
+  m_SuppressFootStepDetectionAndSmellSecondsRemaining?: number;
+  m_CurrentTargetIsPlayer?: boolean;
+  m_DamageSource?: DamageSource;
+  m_ScriptedSequenceAnimTrigger?: string | null;
+  m_Hunted2WaypointControllerSerialized?: string | null;
+  m_BearHuntAiSerialized?: string | null;
+  m_BearHuntAiReduxSerialized?: string | null;
+  m_PackAnimalDataSerialized?: string | null;
+  m_FakeFeeding?: boolean;
+  m_FakeFeedingPos?: [number, number, number] | null;
+  m_FakeFeedingDurationHours?: number;
+  m_UseForcedFleePos?: boolean;
+  m_ForcedFleePos?: [number, number, number] | null;
+  m_UseWanderDestinationAfterStruggle?: boolean;
+  m_WanderDestinationAfterStruggle?: [number, number, number] | null;
+  m_MissionIdSerialized?: string | null;
+  m_FleeFromPos?: [number, number, number] | null;
+  m_FleeReason?: number;
+  m_TargetPointOfInterestIndex?: number;
+  m_RandomizePointsOfInterest?: boolean;
+  m_DefaultMode?: AiMode;
+}
