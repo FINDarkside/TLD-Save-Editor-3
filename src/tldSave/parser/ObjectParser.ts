@@ -1,5 +1,7 @@
 import lzf from 'lzfjs';
-import Parser from './Parser';
+import JSON5 from 'json5';
+import Parser, { ParserOptions } from './Parser';
+import JSON from 'src/util/json';
 
 interface ObjectParserArg {
   [key: string]: Parser;
@@ -29,20 +31,20 @@ export class ObjectParser<
     this.fields = Object.entries(fields ?? {});
   }
 
-  parse(data: SerializedType) {
+  parse(data: SerializedType, options?: ParserOptions) {
     if (data == null) return undefined;
-    let obj = this.preProcessData(data) as ObjSerializedType<T>;
+    let obj = this.preProcessData(data, options) as ObjSerializedType<T>;
 
     const result = { ...obj } as { [key: string]: any };
     for (const [key, parser] of this.fields) {
       const valueKey = parser.fromField || key;
       const value = obj[valueKey];
-      result[key] = parser.parse(value);
+      result[key] = parser.parse(value, options);
     }
     return result as CastAny<ExtraFields, {}> & ObjParsedType<T>;
   }
 
-  private preProcessData(data: any) {
+  private preProcessData(data: any, options?: ParserOptions) {
     let result = data;
 
     if (this.isCompressed) {
@@ -53,7 +55,11 @@ export class ObjectParser<
 
     if (this.isJson) {
       // FIXME: Handle this better
-      result = JSON.parse((result as string).replaceAll('Infinity', '0'));
+      if (options?.useJson5) {
+        result = JSON5.parse(result as string);
+      } else {
+        result = JSON.parse(result as string);
+      }
     }
     return result;
   }

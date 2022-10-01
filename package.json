@@ -9,12 +9,14 @@
     "build": "vue-tsc --noEmit && vite build && electron-builder",
     "tsc": "vue-tsc --noEmit",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "bench": "vitest bench"
   },
   "main": "dist/electron/main/index.js",
   "dependencies": {
     "@mdi/font": "5.9.55",
     "async": "^3.2.4",
+    "json5": "^2.2.1",
     "lzfjs": "^1.0.1",
     "roboto-fontface": "*",
     "sass": "^1.55.0",

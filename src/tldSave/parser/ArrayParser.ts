@@ -1,4 +1,4 @@
-import Parser from './Parser';
+import Parser, { ParserOptions } from './Parser';
 
 export class ArrayParser<T extends Parser> {
   protected parser: T;
@@ -11,9 +11,9 @@ export class ArrayParser<T extends Parser> {
     this.parser = parser;
   }
 
-  parse(data: Array<ReturnType<T['serialize']>>) {
+  parse(data: Array<ReturnType<T['serialize']>>, options?: ParserOptions) {
     if (!data) return null;
-    return data.map((item) => this.parser.parse(item)) as ReturnType<
+    return data.map((item) => this.parser.parse(item), options) as ReturnType<
       T['parse']
     >[];
   }
