@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/async": "^3.2.15",
     "@types/node": "^18.7.20",
-    "@types/webfontloader": "^1.0.0",
+    "@types/webfontloader": "^1.6.35",
     "@vitejs/plugin-vue": "^3.0.3",
     "electron": "^20.0.2",
     "electron-builder": "^23.3.3",
