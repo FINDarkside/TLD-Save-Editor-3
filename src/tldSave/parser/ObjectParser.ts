@@ -103,11 +103,7 @@ export class ObjectParser<
     if (!this.isJson) throw new Error('Non-json field cannot be compressed');
     const newParser = this.clone();
     newParser.isCompressed = true;
-    return newParser as unknown as ObjectParser<
-      T,
-      ExtraFields,
-      Uint8Array | number[]
-    >;
+    return newParser as unknown as ObjectParser<T, ExtraFields, Uint8Array>;
   }
 
   from(field: string) {
