@@ -94,18 +94,34 @@ export class ObjectParser<
   }
 
   json() {
-    this.isJson = true;
-    return this as unknown as ObjectParser<T, ExtraFields, string>;
+    const newParser = this.clone();
+    newParser.isJson = true;
+    return newParser as unknown as ObjectParser<T, ExtraFields, string>;
   }
 
   compressed() {
     if (!this.isJson) throw new Error('Non-json field cannot be compressed');
-    this.isCompressed = true;
-    return this as unknown as ObjectParser<T, ExtraFields, Uint8Array>;
+    const newParser = this.clone();
+    newParser.isCompressed = true;
+    return newParser as unknown as ObjectParser<
+      T,
+      ExtraFields,
+      Uint8Array | number[]
+    >;
   }
 
   from(field: string) {
-    this.fromField = field;
-    return this;
+    const newParser = this.clone();
+    newParser.fromField = field;
+    return newParser;
+  }
+
+  private clone() {
+    const newParser = new ObjectParser();
+    newParser.fields = this.fields;
+    newParser.isJson = this.isJson;
+    newParser.isCompressed = this.isCompressed;
+    newParser.fromField = this.fromField;
+    return newParser;
   }
 }
