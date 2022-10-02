@@ -118,6 +118,6 @@ export class ObjectParser<
     newParser.isJson = this.isJson;
     newParser.isCompressed = this.isCompressed;
     newParser.fromField = this.fromField;
-    return newParser;
+    return newParser as unknown as ObjectParser<T, ExtraFields, Uint8Array>;
   }
 }
