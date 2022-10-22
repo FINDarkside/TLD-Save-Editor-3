@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
 import store from '../store'
-import { PartialDeep } from 'type-fest'
+import type { PartialDeep } from 'type-fest'
 import { ref } from 'vue'
 import { computed, toRaw } from 'vue'
 import { useI18n } from 'vue-i18n';
