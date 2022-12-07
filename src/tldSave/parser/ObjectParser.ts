@@ -58,7 +58,7 @@ export class ObjectParser<
 
     if (this.isCompressed) {
       console.time('decompress');
-      result = lzf.decompress(result).toString();
+      result = lzf.decompress(Buffer.from(result, 'base64')).toString();
       console.timeEnd('decompress');
     }
 

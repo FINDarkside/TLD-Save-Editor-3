@@ -34,7 +34,8 @@ const store = {
     const saveFolder = path.join(
       process.env.LOCALAPPDATA,
       'Hinterland',
-      'TheLongDark'
+      'TheLongDark',
+      'Survival'
     );
     const files = (await readdir(saveFolder)).filter((file) =>
       saveFileRegex.test(file)
