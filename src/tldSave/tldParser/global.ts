@@ -1,4 +1,4 @@
-import { parseArray, parseObject, parseValue } from '../parser';
+import { parseArray, parseDictionary, parseObject, parseValue } from '../parser';
 import AchievementSaveData from '../types/generated/AchievementSaveData';
 import ActiveWindSettings from '../types/generated/ActiveWindSettings';
 import AnxietySaveDataProxy from '../types/generated/AnxietySaveDataProxy';
@@ -203,7 +203,14 @@ const globalParser = parseObject({
   trustManager: parseObject().from('m_TrustManagerSerialized').json().withFields<TrustManagerSaveData>(),
   // TODO: Parse trust stuff
   worldMap: parseObject().from('m_WorldMapDataSerialized').json().withFields<WorldMapSaveData>(),
-  mapData: parseObject().from('m_MapDataSerialized').json().withFields<MapSaveData>(),
+  mapData: parseObject({
+    mapSaveDataDict: parseDictionary(parseArray(parseValue().json()).json()).from('m_MapSaveDataDict'),
+    detailSurveyPositions: parseDictionary(parseArray(parseValue().json()).json()).from('m_DetailSurveyPositions'),
+    surveyedVistaLocations: parseDictionary(parseArray(parseValue().json()).json()).from('m_SurveyedVistaLocations'),
+  })
+    .from('m_MapDataSerialized')
+    .json()
+    .withFields<MapSaveData>(),
   // m_BearHuntSerialized deprecated
   bearHuntRedux: parseObject().from('m_BearHuntReduxSerialized').json().withFields<BearHuntReduxSaveData>(),
   knowledgeManager: parseObject({
@@ -241,7 +248,6 @@ const globalParser = parseObject({
   fear: parseObject().from('m_FearSerialized').json().withFields<FearSaveDataProxy>(),
   anxiety: parseObject().from('m_AnxietySerialized').json().withFields<AnxietySaveDataProxy>(),
   suffocating: parseObject().from('m_SuffocatingSerialized').json().withFields<SuffocatingSaveDataProxy>(),
-  // TODO: Needs bigint support
   highResolutionTimer: parseValue<HighResolutionTimerSaveDataProxy>().from('m_HighResolutionTimerSerialized').json(),
   sceneManager: parseObject().from('m_SceneManagerSerialized').json().withFields<SceneManagerSaveDataProxy>(),
   // TODO: m_NotificationFlagSerialized has raw GearItem?

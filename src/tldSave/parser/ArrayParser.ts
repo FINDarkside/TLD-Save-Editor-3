@@ -1,6 +1,10 @@
+import json from 'src/util/json';
 import Parser, { ParserOptions } from './Parser';
 
-export class ArrayParser<T extends Parser> {
+export class ArrayParser<
+  T extends Parser,
+  SerializedType = ReturnType<T['parse']>[]
+> {
   protected parser: T;
 
   fromField: string | undefined;
@@ -11,19 +15,45 @@ export class ArrayParser<T extends Parser> {
     this.parser = parser;
   }
 
-  parse(data: Array<ReturnType<T['serialize']>>, options?: ParserOptions) {
+  parse(data: SerializedType, options?: ParserOptions) {
     if (!data) return null;
-    return data.map((item) => this.parser.parse(item), options) as ReturnType<
+    const arr = this.preProcessData(data);
+    return arr.map((item) => this.parser.parse(item), options) as ReturnType<
       T['parse']
     >[];
   }
 
-  serialize(data: ReturnType<T['parse']>[]) {
-    return data.map((item) => this.parser.serialize(item));
+  private preProcessData(data: any) {
+    let result = data;
+    if (this.isJson) {
+      result = JSON.parse(result as string);
+    }
+    return result as ReturnType<T['parse']>[];
+  }
+
+  serialize(data: ReturnType<T['parse']>[]): SerializedType {
+    const result = data.map((item) => this.parser.serialize(item));
+    if (!this.isJson) return result as SerializedType;
+    return json.stringify(result) as SerializedType;
   }
 
   from(field: string) {
-    this.fromField = field;
-    return this;
+    const newParser = this.clone();
+    newParser.fromField = field;
+    return newParser as unknown as ArrayParser<T>;
+  }
+
+  json() {
+    const newParser = this.clone();
+    newParser.isJson = true;
+    return newParser as unknown as ArrayParser<T>;
+  }
+
+  private clone() {
+    const newParser = new ArrayParser(this.parser);
+    newParser.isJson = this.isJson;
+    newParser.isCompressed = this.isCompressed;
+    newParser.fromField = this.fromField;
+    return newParser as unknown as ArrayParser<T>;
   }
 }

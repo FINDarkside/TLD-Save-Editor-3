@@ -16,6 +16,7 @@ type ObjSerializedType<T extends ObjectParserArg> = {
   [key in keyof T]: Optional<NonNullable<ReturnType<T[key]['serialize']>>>;
 };
 
+const removeDefaults = false;
 const textEncoder = new TextEncoder();
 
 export class ObjectParser<
@@ -42,6 +43,13 @@ export class ObjectParser<
       result[key] = parser.parse(value, options);
       if (parser.fromField) delete result[parser.fromField];
     }
+    if (removeDefaults) {
+      for (const key of Object.keys(result)) {
+        if (result[key] == null || result[key] === 0 || result[key] === false)
+          delete result[key];
+      }
+    }
+
     return result as CastAny<ExtraFields, {}> & ObjParsedType<T>;
   }
 
@@ -81,6 +89,13 @@ export class ObjectParser<
         result[resultKey] = parser.serialize(value);
       }
       if (parser.fromField) delete result[key];
+    }
+
+    if (removeDefaults) {
+      for (const key of Object.keys(result)) {
+        if (result[key] == null || result[key] === 0 || result[key] === false)
+          delete result[key];
+      }
     }
 
     if (!this.isJson) return result as SerializedType;
