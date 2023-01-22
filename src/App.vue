@@ -8,8 +8,12 @@
           item-title="name"
           item-value="file"
           label="Current save"
+          append-icon="mdi-refresh"
+          @click:append="store.refreshAvailableSaves();"
           variant="plain"
           flat
+          :loading="store.loadingSaves"
+          :disabled="store.loadingSaves"
           hide-details
         ></v-select>
         <v-btn

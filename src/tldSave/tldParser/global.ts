@@ -170,7 +170,7 @@ const globalParser = parseObject({
   headache: parseObject().from('m_HeadacheSerialized').json().withFields<HeadacheParams>(),
   musicEvent: parseObject().from('m_MusicEventManagerSerialized').json().withFields<MusicEventSaveData>(),
   chimney: parseObject({
-    data: parseArray(parseObject().json().withFields<LinkedChimneySaveData>()).from('m_SerializedChimneyData'),
+    data: parseArray(parseObject().withFields<LinkedChimneySaveData>()).from('m_SerializedChimneyData'),
   })
     .from('m_ChimneyDataSerialized')
     .json()
