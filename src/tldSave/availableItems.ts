@@ -364,6 +364,7 @@ const availableItems: ItemInfo[] = [
   createTool('GEAR_RevolverAmmoBox', { stackable: { m_UnitsProxy: 12 } }),
   createTool('GEAR_RevolverAmmoCasing', { stackable: { m_UnitsProxy: 1 } }),
   createTool('GEAR_Rifle', { weapon: { m_Clip: [] } }),
+  createTool('GEAR_Rifle_Vaughns', { weapon: { m_Clip: [] } }),
   createTool('GEAR_RifleAmmoBox', { stackable: { m_UnitsProxy: 6 } }),
   createTool('GEAR_RifleAmmoCasing', { stackable: { m_UnitsProxy: 1 } }),
   createTool('GEAR_RifleCleaningKit'),

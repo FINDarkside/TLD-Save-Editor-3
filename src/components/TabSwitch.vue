@@ -39,5 +39,6 @@ const tabs = shallowRef([
 
 .tabs {
   border-bottom: 1px solid #333;
+  overflow: initial !important;
 }
 </style>

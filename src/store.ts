@@ -3,7 +3,7 @@ import lzf from 'lzfjs';
 import { reactive, toRaw } from 'vue';
 import tldParser, { slotParser } from './tldSave/tldParser';
 import parser from './tldSave/tldParser';
-import async from 'async';
+import async, { forEach } from 'async';
 import path from 'path';
 
 interface GameSave {
@@ -21,35 +21,53 @@ const store = {
 
   availableSaves: [] as SaveSlot[],
   currentSave: undefined as undefined | GameSave,
+  loadingSaves: false,
 
   get global() {
     return this.currentSave?.data?.m_Dict?.global;
   },
 
   async refreshAvailableSaves() {
+    this.loadingSaves = true;
+    this.availableSaves = [];
     const saveFileRegex =
       /^(ep[0-9])?(sandbox|challenge|story|relentless)[0-9]+$/;
 
     if (!process.env.LOCALAPPDATA) throw new Error('LOCALAPPDATA is not set');
+
     const saveFolder = path.join(
       process.env.LOCALAPPDATA,
       'Hinterland',
-      'TheLongDark',
-      'Survival'
+      'TheLongDark'
     );
     const files = (await readdir(saveFolder)).filter((file) =>
       saveFileRegex.test(file)
     );
+    const survivalFiles = (
+      await readdir(path.join(saveFolder, 'Survival'))
+    ).filter((file) => saveFileRegex.test(file));
+
     const slots = await async.mapSeries(files, async (file: string) => {
       const fileFullPath = path.join(saveFolder, file);
       const buf = await readFile(fileFullPath);
       const slotData = slotParser.parse(buf);
       return {
         file: fileFullPath,
-        name: slotData?.m_Name || '',
+        name: slotData?.m_DisplayName || "Unnkown"
       };
     });
 
+    await forEach(survivalFiles, async (file: string) => {
+      const fileFullPath = path.join(saveFolder, 'Survival', file);
+      const buf = await readFile(fileFullPath);
+      const slotData = slotParser.parse(buf);
+      slots.unshift({
+        file: fileFullPath,
+        name: slotData?.m_DisplayName || "Unnkown"
+      });
+    });
+
+    this.loadingSaves = false;
     this.availableSaves = slots;
   },
   async loadSave(file: string) {
