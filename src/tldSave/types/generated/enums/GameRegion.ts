@@ -13,5 +13,6 @@ enum GameRegion {
   CanneryRegion = 'CanneryRegion',
   AshCanyonRegion = 'AshCanyonRegion',
   BlackrockRegion = 'BlackrockRegion',
+  UnknownRegion = 'UnknownRegion',
 }
 export default GameRegion;

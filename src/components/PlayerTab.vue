@@ -1,5 +1,4 @@
 <template>
-
   <div class="container">
     <template v-if="condition">
       Health
@@ -10,6 +9,14 @@
         :min="0"
         hide-details
       >
+        <template v-slot:append>
+          <div class="slider_append">
+            {{
+              condition.m_CurrentHPProxy ? round(condition.m_CurrentHPProxy) : 0
+            }}
+            <span class="suffix">%</span>
+          </div>
+        </template>
       </v-slider>
     </template>
 
@@ -51,6 +58,16 @@
         :min="0"
         hide-details
       >
+        <template v-slot:append>
+          <div class="slider_append">
+            {{
+              global.thirst.m_CurrentThirstProxy
+                ? round(global.thirst.m_CurrentThirstProxy)
+                : 0
+            }}
+            <span class="suffix">%</span>
+          </div>
+        </template>
       </v-slider>
     </template>
     <template v-if="global?.fatigue">
@@ -63,6 +80,16 @@
         hide-details
         density="compact"
       >
+        <template v-slot:append>
+          <div class="slider_append">
+            {{
+              global.fatigue.m_CurrentFatigueProxy
+                ? round(global.fatigue.m_CurrentFatigueProxy)
+                : 0
+            }}
+            <span class="suffix">%</span>
+          </div>
+        </template>
       </v-slider>
     </template>
     <template v-if="global?.freezing">
@@ -74,23 +101,31 @@
         :min="0"
         hide-details
       >
+        <template v-slot:append>
+          <div class="slider_append">
+            {{
+              global.freezing.m_CurrentFreezingProxy
+                ? round(global.freezing.m_CurrentFreezingProxy)
+                : 0
+            }}
+            <span class="suffix">%</span>
+          </div>
+        </template>
       </v-slider>
     </template>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
-import store from '../store'
-import { computed, reactive, ref, watch } from 'vue';
-import { freemem } from 'os';
-import { glob } from 'glob';
+import store from '../store';
+import { computed } from 'vue';
 
 const global = computed(() => store.global);
 const condition = computed(() => store.global?.condition);
 
-
+function round(value: number) {
+  return Math.round(value);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -98,6 +133,7 @@ const condition = computed(() => store.global?.condition);
   margin: 2em;
   display: grid;
   grid-template-columns: max-content auto;
+  grid-template-rows: repeat(7, 50px); 
   grid-gap: 0.6em 3em;
   align-items: center;
 }
@@ -114,6 +150,14 @@ const condition = computed(() => store.global?.condition);
 }
 
 .input {
-  max-width: 20em;
+  max-width: 25em;
+}
+
+.slider_append {
+  margin-left: 0.5em;
+  width: 60px;
+  .suffix {
+    color: #9e9e9e;
+  }
 }
 </style>

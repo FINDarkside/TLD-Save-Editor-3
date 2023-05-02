@@ -5,15 +5,31 @@ import tldParser, { slotParser } from './tldSave/tldParser';
 import parser from './tldSave/tldParser';
 import async, { forEach } from 'async';
 import path from 'path';
+import GameRegion from 'src/tldSave/types/generated/enums/GameRegion';
+import availableLocations from 'src/tldSave/availableLocations';
+import mapHelper from 'src/tldSave/mapHelper';
+import { AvailableLocation } from 'src/tldSave/availableLocations';
 
 interface GameSave {
   file: string;
-  data: ReturnType<typeof parser['parse']>;
+  data: ReturnType<(typeof parser)['parse']>;
 }
 
 interface SaveSlot {
   file: string;
   name: string;
+}
+
+interface MapData {
+  source: string;
+  center: [number, number];
+  zoom: number;
+  size: [number, number];
+  extent: [number, number, number, number];
+  extentLimit: [number, number, number, number];
+  region: GameRegion;
+  position: [number, number, number];
+  availableLocations: AvailableLocation[];
 }
 
 const store = {
@@ -22,9 +38,61 @@ const store = {
   availableSaves: [] as SaveSlot[],
   currentSave: undefined as undefined | GameSave,
   loadingSaves: false,
+  loadingInfo: {
+    totalCount: 0,
+    currentIndex: 0,
+  },
 
   get global() {
     return this.currentSave?.data?.m_Dict?.global;
+  },
+
+  get screenshot() {
+    return this.currentSave?.data?.m_Dict?.screenshot?.m_Encoded;
+  },
+
+  get mapData(): MapData {
+    const reg = this.currentSave?.data?.m_Dict?.boot?.m_SceneName;
+    const region =
+      (reg && GameRegion[reg as keyof typeof GameRegion]) ||
+      GameRegion.UnknownRegion;
+    const pos = this.currentSave?.data?.m_Dict?.global?.player
+      ?.m_SaveGamePosition || [0, 0, 0];
+    const availableLocs = (region && availableLocations[region]) || [];
+    const map = region && mapHelper.get(region);
+    const center: [number, number] = map ? map.originOffset : [-1000, -1000];
+    const source = map ? map.path : '';
+    const size: [number, number] = map ? map.size : [2000, 2000];
+    const whiteSpace = 500;
+    const extent: [number, number, number, number] = [
+      center[0],
+      center[1],
+      size[0] + center[0],
+      size[1] + center[1],
+    ];
+    const extentLimit: [number, number, number, number] = [
+      extent[0] - whiteSpace,
+      extent[1] - whiteSpace,
+      extent[2] + whiteSpace,
+      extent[3] + whiteSpace,
+    ];
+
+    return {
+      region,
+      position: pos,
+      availableLocations: availableLocs,
+      center,
+      source,
+      zoom: 3,
+      size,
+      extent: extent,
+      extentLimit: extentLimit,
+    };
+  },
+
+  async newPosition(pos: [number, number, number]) {
+    if (!pos || !this.global?.player?.m_SaveGamePosition) return;
+    this.global.player.m_SaveGamePosition = pos;
   },
 
   async refreshAvailableSaves() {
@@ -47,13 +115,16 @@ const store = {
       await readdir(path.join(saveFolder, 'Survival'))
     ).filter((file) => saveFileRegex.test(file));
 
+    this.loadingInfo.totalCount = files.length + survivalFiles.length;
+
     const slots = await async.mapSeries(files, async (file: string) => {
       const fileFullPath = path.join(saveFolder, file);
       const buf = await readFile(fileFullPath);
       const slotData = slotParser.parse(buf);
+      this.loadingInfo.currentIndex++;
       return {
         file: fileFullPath,
-        name: slotData?.m_DisplayName || "Unnkown"
+        name: slotData?.m_DisplayName || 'Unnkown',
       };
     });
 
@@ -61,13 +132,18 @@ const store = {
       const fileFullPath = path.join(saveFolder, 'Survival', file);
       const buf = await readFile(fileFullPath);
       const slotData = slotParser.parse(buf);
+      this.loadingInfo.currentIndex++;
       slots.unshift({
         file: fileFullPath,
-        name: slotData?.m_DisplayName || "Unnkown"
+        name: slotData?.m_DisplayName || 'Unnkown',
       });
     });
 
     this.loadingSaves = false;
+    this.loadingInfo = {
+      totalCount: 0,
+      currentIndex: 0,
+    };
     this.availableSaves = slots;
   },
   async loadSave(file: string) {

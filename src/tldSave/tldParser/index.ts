@@ -2,6 +2,7 @@ import { parseObject } from '../parser';
 import type SlotData from '../types/generated/SlotData';
 import type BootSaveGameFormat from '../types/generated/BootSaveGameFormat';
 import type InfoSaveGameFormat from '../types/generated/InfoSaveGameFormat';
+import type ScreenSaveGameFormat from '../types/generated/ScreenSaveGameFormat';
 import globalParser from './global';
 
 const tldParser = parseObject({
@@ -9,6 +10,7 @@ const tldParser = parseObject({
     global: globalParser,
     boot: parseObject().json().compressed().withFields<BootSaveGameFormat>(),
     info: parseObject().json().compressed().withFields<InfoSaveGameFormat>(),
+    screenshot: parseObject().json().compressed().withFields<ScreenSaveGameFormat>(),
   }),
 })
   .json()
