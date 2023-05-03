@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts" setup>
-import { effect, onMounted, ref, watch, computed } from 'vue';
+import { effect, onMounted, ref, computed } from 'vue';
 import store from './store';
 import TabSwitch from './components/TabSwitch.vue';
 

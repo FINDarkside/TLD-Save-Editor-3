@@ -39,7 +39,7 @@
           :active="selectedItem === item"
           @click="selectedItem = item"
         >
-          <v-list-item-title> {{getGearDisplayName(item?.m_PrefabName)}}</v-list-item-title>
+          <v-list-item-title> {{ getGearDisplayName(item?.m_PrefabName) }}</v-list-item-title>
         </v-list-item>
       </v-list>
 

@@ -1,7 +1,10 @@
 <template>
   <div class="main">
-    <coords-dialog ref="DialogRef" style="position: absolute" />
-    <div class="map_controls">
+    <coords-dialog
+      ref="DialogRef"
+      style="position: absolute"
+    />
+    <div :class="$style.map_controls">
       <v-card :elevation="5">
         <v-btn
           icon="mdi-minus"
@@ -31,8 +34,11 @@
         </template>
       </v-tooltip>
     </div>
-    <div class="map_search">
-      <v-card width="250px" :elevation="5">
+    <div :class="$style.map_search">
+      <v-card
+        width="250px"
+        :elevation="5"
+      >
         <v-autocomplete
           placeholder="Search for location"
           single-line
@@ -54,12 +60,15 @@
       class=""
     >
       <v-fade-transition>
-        <v-card :elevation="5" id="popup">
+        <v-card
+          :elevation="5"
+          id="popup"
+        >
           <v-card-title>{{ selectedPoint.name }}</v-card-title>
           <v-card-actions>
             <v-btn
               @click="setNewPosition(selectedPoint.position)"
-              :disabled="selectedPoint.name == ''"
+              :disabled="selectedPoint.name === ''"
               variant="tonal"
             >
               TRAVEL
@@ -335,3 +344,24 @@ onMounted(() => {
   });
 });
 </script>
+
+<style lang="scss" module>
+.map_container {
+  //height: calc(80vh - 96px);
+  width: 100vw;
+}
+
+.map_controls {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  z-index: 2;
+}
+
+.map_search {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 2;
+}
+</style>

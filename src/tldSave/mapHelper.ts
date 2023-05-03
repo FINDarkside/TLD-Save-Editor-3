@@ -1,13 +1,12 @@
-import { map } from 'async';
 import region from './types/generated/enums/GameRegion';
 
-export interface map {
+export interface Map {
   size: [number, number];
   originOffset: [number, number];
   path: string;
 }
 
-type mapItem = [region, map];
+type mapItem = [region, Map];
 
 const createMap = (
   region: region,
@@ -25,7 +24,7 @@ const createMap = (
   ];
 };
 
-const mapHelper = new Map<region, map>([
+const mapHelper = new Map<region, Map>([
   createMap(
     region.AshCanyonRegion,
     [2274, 2655],

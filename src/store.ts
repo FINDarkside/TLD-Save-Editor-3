@@ -1,5 +1,5 @@
 import { readdir, readFile, writeFile } from 'fs/promises';
-import lzf from 'lzfjs';
+//import lzf from 'lzfjs';
 import { reactive, toRaw } from 'vue';
 import tldParser, { slotParser } from './tldSave/tldParser';
 import parser from './tldSave/tldParser';
@@ -90,7 +90,7 @@ const store = {
     };
   },
 
-  async newPosition(pos: [number, number, number]) {
+  newPosition(pos: [number, number, number]) {
     if (!pos || !this.global?.player?.m_SaveGamePosition) return;
     this.global.player.m_SaveGamePosition = pos;
   },
