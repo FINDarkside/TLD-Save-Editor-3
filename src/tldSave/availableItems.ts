@@ -434,6 +434,10 @@ const availableItems: ItemInfo[] = [
   createMaterial('GEAR_WolfPeltDried', { stackable: { m_UnitsProxy: 1 } }),
   createMaterial('GEAR_BarkTinder', { stackable: { m_UnitsProxy: 1 } }),
   createTool('GEAR_BookA', { stackable: { m_UnitsProxy: 1 } }),
+  createTool('GEAR_BookB', { stackable: { m_UnitsProxy: 1 } }),
+  createTool('GEAR_BookC', { stackable: { m_UnitsProxy: 1 } }),
+  createTool('GEAR_BookD', { stackable: { m_UnitsProxy: 1 } }),
+  createTool('GEAR_BookF', { stackable: { m_UnitsProxy: 1 } }),
   createTool('GEAR_CashBundle', { stackable: { m_UnitsProxy: 1 } }),
   createTool('GEAR_CattailTinder', { stackable: { m_UnitsProxy: 1 } }),
   createTool('GEAR_Coal', { stackable: { m_UnitsProxy: 1 } }),
@@ -647,6 +651,10 @@ const availableItems: ItemInfo[] = [
   createCollectible('GEAR_TrailerSupplies'),
   createCollectible('GEAR_TransponderParts'),
   createCollectible('GEAR_UtilitiesBill'),
+  ...new Array(3).fill(null).map((v, i) => createCollectible(`GEAR_VisorNoteMT${i + 1}`)), //there may be more
+  ...new Array(3).fill(null).map((v, i) => createCollectible(`GEAR_VisorNoteML${i + 1}`)),
+  ...new Array(1).fill(null).map((v, i) => createCollectible(`GEAR_VisorNoteFM${i + 1}`)),
+  createCollectible('GEAR_VisorNoteMTKey1'),
   createCollectible('GEAR_WaterpumpCrank'),
   createCollectible('GEAR_WaterTowerNote'),
 

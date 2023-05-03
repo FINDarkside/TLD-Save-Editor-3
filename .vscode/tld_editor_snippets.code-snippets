@@ -1,0 +1,8 @@
+{
+  "Available Location Snippet": {
+    "scope": "typescript",
+    "prefix": "cr",
+    "body": ["createAvailableLocation('$1', [$2, $3, $4]),"],
+    "description": "Create Available Location"
+  }
+}

@@ -1,5 +1,4 @@
 <template>
-
   <div :class="$style.container">
     <v-tabs
       v-model="store.selectedTab"
@@ -17,16 +16,17 @@
 </template>
 
 <script setup lang="ts">
-import { h, shallowRef, ref, watch } from 'vue'
-import InventoryTab from './InventoryTab.vue'
-import PlayerTab from './PlayerTab.vue'
-import store from 'src/store'
+import { shallowRef } from 'vue';
+import InventoryTab from './InventoryTab.vue';
+import PlayerTab from './PlayerTab.vue';
+import MapTab from './MapTab.vue';
+import store from 'src/store';
 
 const tabs = shallowRef([
   { name: 'Player', component: PlayerTab },
   { name: 'Inventory', component: InventoryTab },
-])
-
+  { name: 'Map', component: MapTab },
+]);
 </script>
 
 <style lang="scss" module>

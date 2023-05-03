@@ -1,9 +1,10 @@
 import type ExperienceModeType from './enums/ExperienceModeType';
 import type VoicePersona from './enums/VoicePersona';
+import type GameRegion from './enums/GameRegion';
 
 export default interface InfoSaveGameFormat {
   m_XPMode?: ExperienceModeType;
-  m_Region?: string | null;
+  m_Region?: GameRegion | null;
   m_LocationOverride?: string | null;
   m_Persona?: VoicePersona;
   m_Condition?: number;
