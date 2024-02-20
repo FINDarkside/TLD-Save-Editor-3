@@ -101,6 +101,8 @@ const availableItems: ItemInfo[] = [
   createClothing('GEAR_AstridSweater'),
   createClothing('GEAR_AstridToque'),
   createClothing('GEAR_Balaclava'),
+  createClothing('GEAR_TechnicalBalaclava'),
+  createClothing('GEAR_AviatorCap'),
   createClothing('GEAR_BallisticVest'),
   createClothing('GEAR_BaseballCap'),
   createClothing('GEAR_BasicBoots'),
@@ -189,6 +191,7 @@ const availableItems: ItemInfo[] = [
   createClothing('GEAR_WorkPants'),
 
   // Food
+  createFood('GEAR_Carrot', { stackable: { m_UnitsProxy: 1 } }),
   createFood('GEAR_AirlineFoodChick', { food: { m_CaloriesRemainingProxy: 620 } }),
   createFood('GEAR_AirlineFoodVeg', { food: { m_CaloriesRemainingProxy: 560 } }),
   createFood('GEAR_BeefJerky', { food: { m_CaloriesRemainingProxy: 350 } }),
@@ -222,6 +225,7 @@ const availableItems: ItemInfo[] = [
   createFood('GEAR_MRE', { food: { m_CaloriesRemainingProxy: 1750 } }),
   createFood('GEAR_PeanutButter', { food: { m_CaloriesRemainingProxy: 900 } }),
   createFood('GEAR_PinnacleCanPeaches', { food: { m_CaloriesRemainingProxy: 450 } }),
+  createFood('GEAR_CannedCorn', { food: { m_CaloriesRemainingProxy: 450 } }),
   createFood('GEAR_PumpkinPie', { food: { m_CaloriesRemainingProxy: 2000 } }),
   createFood('GEAR_PumpkinPieDarkwalker', { food: { m_CaloriesRemainingProxy: 300 } }),
   createFood('GEAR_RawBigBass', { food: { m_CaloriesRemainingProxy: 1100 } }),
@@ -253,6 +257,14 @@ const availableItems: ItemInfo[] = [
       m_HideAvailableUnits: 1,
       m_GutAvailableUnits: 10,
       m_Condition: 100,
+    },
+  }),
+  createFood('GEAR_PtarmiganCarcass', {
+    bodyHarvest: {
+      m_MeatAvailableKG: 1,
+      m_FeathersAvailableUnits: 1,
+      m_Condition: 100,
+      m_QuarterBagWasteMultiplier: 1,
     },
   }),
   createFood('GEAR_RabbitCarcass', {
@@ -315,6 +327,7 @@ const availableItems: ItemInfo[] = [
   createTool('GEAR_BearSpearStory', { flare: { m_StateProxy: FlareState.Fresh, m_HoursPlayed: 0 } }),
   createTool('GEAR_BoltCutters'),
   createTool('GEAR_Bow'),
+  createTool('GEAR_Bow_Woodwrights'),
   createTool('GEAR_Brand', { torch: { m_StateProxy: TorchState.Fresh } }),
   createTool('GEAR_BrokenArrow'),
   createTool('GEAR_BrokenRifle'),
@@ -350,6 +363,7 @@ const availableItems: ItemInfo[] = [
   createTool('GEAR_JeremiahKnife'),
   createTool('GEAR_JerrycanRusty', { liquid: { m_LiquidLitersProxy: 3, m_LiquidQuality: LiquidQuality.NonPotable } }),
   createTool('GEAR_KeroseneLampB', { m_CurrentHPProxy: 0.25 }),
+  createTool('GEAR_KeroseneLamp_Spelunkers', { m_CurrentHPProxy: 0.25 }),
   createTool('GEAR_Knife'),
   createTool('GEAR_KnifeImprovised'),
   createTool('GEAR_LampFuel', { liquid: { m_LiquidLitersProxy: 0.25, m_LiquidQuality: LiquidQuality.NonPotable } }),
@@ -365,6 +379,8 @@ const availableItems: ItemInfo[] = [
   createTool('GEAR_RevolverAmmoCasing', { stackable: { m_UnitsProxy: 1 } }),
   createTool('GEAR_Rifle', { weapon: { m_Clip: [] } }),
   createTool('GEAR_Rifle_Vaughns', { weapon: { m_Clip: [] } }),
+  createTool('GEAR_Rifle_Barbs', { weapon: { m_Clip: [] } }),
+  createTool('GEAR_Rifle_Curators', { weapon: { m_Clip: [] } }),
   createTool('GEAR_RifleAmmoBox', { stackable: { m_UnitsProxy: 6 } }),
   createTool('GEAR_RifleAmmoCasing', { stackable: { m_UnitsProxy: 1 } }),
   createTool('GEAR_RifleCleaningKit'),
@@ -463,6 +479,16 @@ const availableItems: ItemInfo[] = [
   createBook('GEAR_BookTallTalesYeti'),
 
   // Collectible
+  createCollectible('GEAR_RecipeCardFishcakes'),
+  createCollectible('GEAR_RecipeCardPancakePeach'),
+  createCollectible('GEAR_RecipeCardPieFishermans'),
+  createCollectible('GEAR_RecipeCardPieForagers'),
+  createCollectible('GEAR_RecipeCardPieMeat'),
+  createCollectible('GEAR_RecipeCardPiePredator'),
+  createCollectible('GEAR_RecipeCardPorridgeFruit'),
+  createCollectible('GEAR_RecipeCardStewMeat'),
+  createCollectible('GEAR_RecipeCardStewVegetables'),
+  createCollectible('GEAR_WaterTowerNote'),
   createCollectible('GEAR_AuroraHatchCode'),
   createCollectible('GEAR_BackerNote1A'),
   createCollectible('GEAR_BackerNote1B'),
@@ -657,8 +683,10 @@ const availableItems: ItemInfo[] = [
   createCollectible('GEAR_VisorNoteMTKey1'),
   createCollectible('GEAR_WaterpumpCrank'),
   createCollectible('GEAR_WaterTowerNote'),
+  createCollectible('GEAR_WaterTowerNote'),
 
   // Unknown
+  createUnknown('GEAR_Potato'),
   createUnknown('GEAR_AstridBackPack_hangar'),
   createUnknown('GEAR_FoodSupplies_hangar'),
   createUnknown('GEAR_ForestTalkerBloodyItem'),

@@ -19,4 +19,5 @@ export default interface BodyHarvestSaveDataProxy {
   m_QuarterBagWasteMultiplier?: number;
   m_MissionIdSerialized?: string | null;
   m_BearHuntAiReduxSerialized?: string | null;
+  m_FeathersAvailableUnits?: number;
 }
