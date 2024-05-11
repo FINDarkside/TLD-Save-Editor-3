@@ -5,17 +5,17 @@ export interface AvailableLocation {
   name: string;
   id: string;
   position: [number, number, number];
-  screenshot?: string;
+  screenshotPath: string;
 }
 
 const createAvailableLocation = (
   name: string,
   position: [number, number, number],
   screenshot?: string
-) => {
+): AvailableLocation => {
   let screenshotPath = screenshot
-    ? `/src/assets/${screenshot}/marker.png`
-    : undefined;
+      ? `/src/assets/thumbnails/${screenshot}.webp`
+      : '/src/assets/thumbnails/unknown.webp';
   return {
     name,
     position,
@@ -79,6 +79,33 @@ const availableLocations: AvailableLocations = {
     createAvailableLocation('Barn', [-37.4, 129.2, -763.3]),
     createAvailableLocation("Cook's farm", [189.9, 181.1, -246.5]),
     createAvailableLocation('Power Plant', [-370.1, 78.2, 439]),
+  ],
+  [region.RuralRegion]: [
+    createAvailableLocation("Cutty's Cave", [500, 186.8, -600]),
+    createAvailableLocation("Thomson's Crossing", [2385.6, 54.5, 2248.1]),
+    createAvailableLocation("Pleasant valley farmstead", [1475.7, 50.1, 1020.1]),
+    createAvailableLocation("TEMP_PLANE", [548.8, 151.5, 1744.7]),
+    createAvailableLocation("Signal Hill", [1923.6, 202.2, 619]),
+  ],
+  [region.MarshRegion]: [
+    createAvailableLocation('To Mystery Lake', [1756.7, -129.6, 1103.7], 'fm/to_mystery_lakle'),
+    createAvailableLocation("Poacher's Camp", [1115.2, -128.2, 976.8], 'fm/poachers_camp'),
+    createAvailableLocation('Muskeg Overlook', [1512.2, -45, 458], 'fm/muskeg_overlook'),
+    createAvailableLocation('To Bleak Inlet', [1396.2, -91.1, 13.1], 'fm/to_bleak_inlet'),
+    createAvailableLocation('Cave 1', [1087.1, -118.2, -162], 'fm/cave_1'),
+    createAvailableLocation('Bunkhouses', [737.2, -128.3, -14.2], 'fm/bunkhouses'),
+    createAvailableLocation('Old Spence Family Homestead', [475.5, -121.3, 53.3], 'fm/old_spence_family_homestead'),
+    createAvailableLocation('Old Spence - Island', [555, -131.2, 337.1], 'fm/old_spence_island'),
+    createAvailableLocation('Broken Transmitter - Cave', [-27.4, -95.1, 139.5], 'fm/broken_transmitter_cave'),
+    createAvailableLocation('Broken Transmitter', [96, -90.7, 233.6], 'fm/broken_transmitter'),
+    createAvailableLocation('High Blind', [1069.4, -123.8, 390.3], 'fm/high_blind'),
+    createAvailableLocation('To Broken Railroad', [-86.1, -129.6, 843.6], 'fm/to_broken_railroad'),
+    createAvailableLocation('Low Blind', [284, -129.1, 1038.2], 'fm/low_blind'),
+    createAvailableLocation('Rope', [269.9, -64.7, 1331.4], 'fm/rope'),
+    createAvailableLocation('To Mountain Town', [270.1, -5.5, 1571.2], 'fm/to_mountain_town'),
+    createAvailableLocation('Waterfall Cave', [539.6, -25.3, 1646], 'fm/waterfall_cave'),
+    createAvailableLocation('Shortwave Tower', [696.1, -17.3, 1480.4], 'fm/shortwave_tower'),
+    createAvailableLocation('Cave 2', [1137.6, -106.9, 1436.1], 'fm/cave_2'),
   ],
 };
 
