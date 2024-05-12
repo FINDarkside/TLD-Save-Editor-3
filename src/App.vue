@@ -7,17 +7,19 @@
           :items="store.availableSaves"
           item-title="name"
           item-value="file"
-          label="Select save"
-          append-icon="mdi-refresh"
-          @click:append="store.refreshAvailableSaves()"
-          variant="plain"
+          placeholder="Select save"
+          variant="solo"
           flat
           :loading="store.loadingSaves"
           :disabled="store.loadingSaves"
           hide-details
+          density="compact"
+          hide-selected
         ></v-select>
-        <v-btn class="ml-5" @click="store.saveCurrent()" flat>Save</v-btn>
+        <v-icon class="mx-5" @click="store.refreshAvailableSaves()">mdi-refresh</v-icon>
+        <v-btn variant="flat" @click="store.saveCurrent()" flat height="48">Save</v-btn>
       </div>
+      <v-divider></v-divider>
 
       <TabSwitch v-if="store.currentSave" />
 
@@ -66,7 +68,7 @@ onMounted(() => {
 
 <style>
 html {
-  overflow: auto !important;
+  overflow: hidden !important;
 }
 </style>
 
@@ -75,9 +77,7 @@ html {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-top: 7px;
+  margin-left: 7px;
 }
 
 .app {

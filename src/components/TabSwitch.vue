@@ -6,6 +6,7 @@
     >
       <v-tab v-for="tab in tabs">{{ tab.name }}</v-tab>
     </v-tabs>
+    <v-divider></v-divider>
     <template v-for="(tab, i) in tabs">
       <component
         :is="tab.component"
@@ -34,11 +35,9 @@ const tabs = shallowRef([
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #333;
 }
 
 .tabs {
-  border-bottom: 1px solid #333;
   overflow: initial !important;
 }
 </style>
