@@ -199,7 +199,6 @@ function manuSelect(e: AvailableLocation | null): void {
   selectedPoint.id = e.id;
   selectedPoint.screenshotPath = e.screenshotPath;
   selectedPoint.position = e.position;
-  console.log(e.screenshotPath)
 }
 
 watch(

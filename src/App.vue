@@ -17,15 +17,16 @@
           hide-selected
         ></v-select>
         <v-icon class="mx-5" @click="store.refreshAvailableSaves()">mdi-refresh</v-icon>
+        <v-btn variant="flat" v-if="selectedSave" @click="undoChanges()" flat height="48">Reload</v-btn>
         <v-btn variant="flat" @click="store.saveCurrent()" flat height="48">Save</v-btn>
       </div>
       <v-divider></v-divider>
 
-      <TabSwitch v-if="store.currentSave" />
+      <TabSwitch v-if="store.currentSave && !store.loadingSaves" />
 
       <div
         class="d-flex fill-height"
-        v-if="store.loadingSaves && !store.currentSave"
+        v-if="store.loadingSaves"
       >
         <v-col cols="12">
           <v-row class="justify-center align-center fill-height">
@@ -64,6 +65,10 @@ effect(() => {
 onMounted(() => {
   store.refreshAvailableSaves();
 });
+
+function undoChanges() {
+  if (selectedSave.value) store.loadSave(selectedSave.value);
+}
 </script>
 
 <style>

@@ -61,14 +61,12 @@ const store = {
     const availableLocs = (region && availableLocations[region]) || [];
     const map = region && mapHelper.get(region);
     let _center: [number, number]
-    console.log(map?.path)
     if (!map || map?.path == "/src/assets/maps/unknown.svg") {
       _center = [pos[0] - 1000, pos[2] - 1000];
     } else {
       _center = map.originOffset
     }
     const center = _center
-    console.log(`Center ${center} pos ${pos}`)
     const source = map ? map.path : '';
     const size: [number, number] = map ? map.size : [2000, 2000];
     const whiteSpace = 500;
