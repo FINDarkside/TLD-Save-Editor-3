@@ -6,29 +6,36 @@
         :items="availableCategories"
         item-title="name"
         label="Category"
-        variant="plain"
+        variant="solo"
         flat
         single-line
         hide-details
         return-object
+        density="comfortable"
+        width="45vw"
       ></v-select>
       <v-select
         v-model="selectedItemToAdd"
         :items="availableItemsToShow"
         item-title="displayName"
         label="Item to add"
-        variant="plain"
+        variant="solo"
         flat
         single-line
         hide-details
         return-object
+        density="comfortable"
+        height="48"
+        width="45vw"
       ></v-select>
       <v-btn
         :class="$style.addItemButton"
+        height="48px"
         flat
         @click="addItem"
       >Add item</v-btn>
     </div>
+    <v-divider></v-divider>
 
     <div :class="$style.container">
       <v-list :class="$style.itemListPanel">
@@ -127,7 +134,6 @@ const deleteItem = () => {
 
 <style lang="scss" module>
 .toolbar {
-  border-bottom: 1px solid #333;
   display: flex;
 }
 
@@ -143,9 +149,10 @@ const deleteItem = () => {
 }
 
 .itemContainer {
-  margin: 2em;
+  padding: 2em;
   min-width: 0;
   flex-grow: 1;
+  overflow-y: auto;
 }
 
 .addItemButton {

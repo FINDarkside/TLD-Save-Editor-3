@@ -55,16 +55,16 @@ const mapHelper = new Map<region, Map>([
     [-65, -348],
     'crash_mountain_region.webp'
   ),
-  createMap(region.FutureRegion, [5000, 5000], [-2500, -2500], 'unknown.svg'),
+  createMap(region.FutureRegion, [2000, 2000], [-1000, -1000], 'unknown.svg'),
   createMap(region.LakeRegion),
-  createMap(region.MarshRegion),
-  createMap(region.MountainTownRegion),
+  createMap(region.MarshRegion, [2121, 2580], [-141, -241], 'marsh_region.webp'),
+  createMap(region.MountainTownRegion, [2300, 2781], [-42, -241], 'mountain_town_region.webp'),
   createMap(region.RandomRegion),
   createMap(region.RiverValleyRegion),
-  createMap(region.RuralRegion),
+  createMap(region.RuralRegion, [3306, 3515], [-156, -152]),
   createMap(region.TracksRegion),
   createMap(region.WhalingStationRegion),
-  createMap(region.UnknownRegion, [5000, 5000], [-2500, -2500], 'unknown.svg'),
+  createMap(region.UnknownRegion, [2000, 2000], [-1000, -1000], 'unknown.svg'),
 ]);
 
 export default mapHelper;

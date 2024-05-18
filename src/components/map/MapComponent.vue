@@ -33,6 +33,17 @@
           ></v-btn>
         </template>
       </v-tooltip>
+      <v-spacer class="my-5"></v-spacer>
+      <v-tooltip :text="`Current region - ${store.currentSave?.data?.m_Dict?.boot?.m_SceneName}`">
+        <template v-slot:activator="{ props }">
+          <v-icon
+              v-bind="props"
+              color="grey"
+          >
+            mdi-help-circle-outline
+          </v-icon>
+        </template>
+      </v-tooltip>
     </div>
     <div :class="$style.map_search">
       <v-card
@@ -59,23 +70,37 @@
       style="width: 100vw; height: calc(100vh - 96px)"
       class=""
     >
-      <v-fade-transition>
-        <v-card
+      <v-card
           :elevation="5"
           id="popup"
-        >
-          <v-card-title>{{ selectedPoint.name }}</v-card-title>
-          <v-card-actions>
-            <v-btn
-              @click="setNewPosition(selectedPoint.position)"
-              :disabled="selectedPoint.name === ''"
-              variant="tonal"
-            >
-              TRAVEL
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-fade-transition>
+          width="25em"
+          rounded="lg"
+          color="transparent"
+      >
+        <v-fade-transition>
+          <v-img
+              class="align-end text-white"
+              height="200"
+              :src="selectedPoint.screenshotPath"
+              cover
+              :gradient="`to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 73%, rgba(0,0,0,0.5) 100%`"
+          >
+            <v-card-title>{{ selectedPoint.name }}</v-card-title>
+            <v-card-actions>
+              <v-btn
+                  @click="setNewPosition(selectedPoint.position)"
+                  :disabled="selectedPoint.name === ''"
+                  variant="tonal"
+                  color="white"
+                  size="large"
+              >
+                TRAVEL
+              </v-btn>
+            </v-card-actions>
+
+          </v-img>
+        </v-fade-transition>
+      </v-card>
     </div>
   </div>
 </template>
@@ -112,7 +137,7 @@ const selectedPoint: AvailableLocation = reactive({
   name: '',
   position: [0, 0, 0],
   id: '',
-  screenshot: '',
+  screenshotPath: '',
 });
 
 interface MapData {
@@ -161,8 +186,8 @@ function centerOnPoint(coordinates: [number, number]): void {
   });
 }
 
-function manuSelect(e: AvailableLocation): void {
-  if (!e && selectedPoint.name !== '') {
+function manuSelect(e: AvailableLocation | null): void {
+  if (!e && selectedPoint.name !== '' || e == null) {
     selectedPoint.name = '';
     return mapRoot.value?.getOverlayById('popup')?.setPosition(undefined);
   }
@@ -172,7 +197,7 @@ function manuSelect(e: AvailableLocation): void {
     ?.setPosition([e.position[0], e.position[2]]);
   selectedPoint.name = e.name;
   selectedPoint.id = e.id;
-  selectedPoint.screenshot = e.screenshot;
+  selectedPoint.screenshotPath = e.screenshotPath;
   selectedPoint.position = e.position;
 }
 
@@ -200,7 +225,7 @@ function createGeoJSON() {
             name: location.name,
             id: location.id,
             fullCoordinates: location.position,
-            screenshot: location.screenshot,
+            screenshotPath: location.screenshotPath,
           },
         };
       });
@@ -338,7 +363,7 @@ onMounted(() => {
         ?.setPosition([coordiantes[0], coordiantes[2]]);
       selectedPoint.name = feature.get('name');
       selectedPoint.id = feature.get('id');
-      selectedPoint.screenshot = feature.get('screenshot');
+      selectedPoint.screenshotPath = feature.get('screenshotPath');
       selectedPoint.position = coordiantes;
     });
   });
