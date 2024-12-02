@@ -4,6 +4,7 @@ import { reactive, toRaw } from 'vue';
 import tldParser, { slotParser } from './tldSave/tldParser';
 import parser from './tldSave/tldParser';
 import async, { forEach } from 'async';
+const os = require('os');
 import path from 'path';
 import GameRegion from 'src/tldSave/types/generated/enums/GameRegion';
 import availableLocations from 'src/tldSave/availableLocations';
@@ -107,13 +108,15 @@ const store = {
     const saveFileRegex =
       /^(ep[0-9])?(sandbox|challenge|story|relentless)[0-9]+$/;
 
-    if (!process.env.LOCALAPPDATA) throw new Error('LOCALAPPDATA is not set');
+    let saveFolder;
 
-    const saveFolder = path.join(
-      process.env.LOCALAPPDATA,
-      'Hinterland',
-      'TheLongDark'
-    );
+    if (os.platform() === 'darwin') {
+      saveFolder = path.join(os.homedir(), '.local', 'share', 'Hinterland', 'TheLongDark');
+    } else {
+      if (!process.env.LOCALAPPDATA) throw new Error('LOCALAPPDATA is not set');
+      saveFolder = path.join(process.env.LOCALAPPDATA, 'Hinterland', 'TheLongDark');
+    }
+
     const files = (await readdir(saveFolder)).filter((file) =>
       saveFileRegex.test(file)
     );
