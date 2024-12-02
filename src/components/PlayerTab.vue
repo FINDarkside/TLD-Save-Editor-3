@@ -42,10 +42,12 @@
       Reserver calories
       <v-text-field
         :class="$style.input"
-        v-model="global.hunger.m_CurrentReserveCaloriesProxy"
+        v-model.number="global.hunger.m_CurrentReserveCaloriesProxy"
         variant="outlined"
         hide-details
+        type="number"
         density="compact"
+        @blur="global.hunger.m_CurrentReserveCaloriesProxy = global.hunger.m_CurrentReserveCaloriesProxy || 0"
       >
       </v-text-field>
     </template>

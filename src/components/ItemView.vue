@@ -14,72 +14,78 @@
     <template v-if="gear?.stackable">
       Amount
       <v-text-field
-        v-model="gear.stackable.m_UnitsProxy"
+        v-model.number="gear.stackable.m_UnitsProxy"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.stackable.m_UnitsProxy = gear.stackable.m_UnitsProxy || 0"
       />
     </template>
     <template v-if="gear?.food">
       Calories remaining
       <v-text-field
-        v-model="gear.food.m_CaloriesRemainingProxy"
+        v-model.number="gear.food.m_CaloriesRemainingProxy"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.food.m_CaloriesRemainingProxy = gear.food.m_CaloriesRemainingProxy || 0"
       />
       Calories total
       <v-text-field
-        v-model="gear.food.m_CaloriesTotal"
+        v-model.number="gear.food.m_CaloriesTotal"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.food.m_CaloriesTotal = gear.food.m_CaloriesTotal || 0"
       />
     </template>
     <template v-if="gear?.liquid">
       Amount (liters)
       <v-text-field
-        v-model="gear.liquid.m_LiquidLitersProxy"
+        v-model.number="gear.liquid.m_LiquidLitersProxy"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.liquid.m_LiquidLitersProxy = gear.liquid.m_LiquidLitersProxy || 0"
       />
     </template>
     <template v-if="gear?.flashlight">
       Battery charge
       <v-text-field
-        v-model="gear.flashlight.m_CurrentBatteryCharge"
+        v-model.number="gear.flashlight.m_CurrentBatteryCharge"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.flashlight.m_CurrentBatteryCharge = gear.flashlight.m_CurrentBatteryCharge || 0"
       />
     </template>
     <template v-if="gear?.kerosene">
       Amount (liters)
       <v-text-field
-        v-model="gear.kerosene.m_CurrentFuelLitersProxy"
+        v-model.number="gear.kerosene.m_CurrentFuelLitersProxy"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.kerosene.m_CurrentFuelLitersProxy = gear.kerosene.m_CurrentFuelLitersProxy || 0"
       />
     </template>
     <template v-if="gear?.clothing">
       Frozen
       <v-slider
-        v-model="gear.clothing.m_PercentFrozen"
+        v-model.number="gear.clothing.m_PercentFrozen"
         :max="100"
         :min="0"
         hide-details
       />
       Wet
       <v-slider
-        v-model="gear.clothing.m_PercentWet"
+        v-model.number="gear.clothing.m_PercentWet"
         :max="100"
         :min="0"
         hide-details
@@ -88,7 +94,7 @@
     <template v-if="gear?.weapon">
       Loaded rounds
       <v-text-field
-        v-model="gear.weapon.m_RoundsInClipProxy"
+        v-model.number="gear.weapon.m_RoundsInClipProxy"
         :max="100"
         :min="0"
         hide-details
@@ -97,17 +103,18 @@
     <template v-if="gear?.water">
       Amount (liters)
       <v-text-field
-        v-model="gear.water.m_VolumeProxy"
+        v-model.number="gear.water.m_VolumeProxy"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.water.m_VolumeProxy = gear.water.m_VolumeProxy || 0"
       />
     </template>
     <template v-if="gear?.inProgress">
       Completed %
       <v-slider
-        v-model="gear.inProgress.m_PercentComplete"
+        v-model.number="gear.inProgress.m_PercentComplete"
         :max="100"
         :min="0"
         hide-details
@@ -116,63 +123,69 @@
     <template v-if="gear?.evolve">
       Time evolving
       <v-text-field
-        v-model="gear.evolve.m_TimeSpentEvolvingGameHours"
+        v-model.number="gear.evolve.m_TimeSpentEvolvingGameHours"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.evolve.m_TimeSpentEvolvingGameHours = gear.evolve.m_TimeSpentEvolvingGameHours || 0"
       />
     </template>
     <template v-if="gear?.research">
       Elapsed reserach hours
       <v-text-field
-        v-model="gear.research.m_ElapsedHours"
+        v-model.number="gear.research.m_ElapsedHours"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.research.m_ElapsedHours = gear.research.m_ElapsedHours || 0"
       />
     </template>
     <template v-if="gear?.bodyHarvest">
       Meat available (kg)
       <v-text-field
-        v-model="gear.bodyHarvest.m_MeatAvailableKG"
+        v-model.number="gear.bodyHarvest.m_MeatAvailableKG"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.bodyHarvest.m_MeatAvailableKG = gear.bodyHarvest.m_MeatAvailableKG || 0"
       />
       Hide amount
       <v-text-field
-        v-model="gear.bodyHarvest.m_HideAvailableUnits"
+        v-model.number="gear.bodyHarvest.m_HideAvailableUnits"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.bodyHarvest.m_HideAvailableUnits = gear.bodyHarvest.m_HideAvailableUnits || 0"
       />
       Guts amount
       <v-text-field
-        v-model="gear.bodyHarvest.m_GutAvailableUnits"
+        v-model.number="gear.bodyHarvest.m_GutAvailableUnits"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.bodyHarvest.m_GutAvailableUnits = gear.bodyHarvest.m_GutAvailableUnits || 0"
       />
     </template>
     <template v-if="gear?.powder">
       Amount (kg)
       <v-text-field
-        v-model="gear.powder.m_WeightKG"
+        v-model.number="gear.powder.m_WeightKG"
         variant="outlined"
         hide-details
         density="compact"
         type="number"
+        @blur="gear.powder.m_WeightKG = gear.powder.m_WeightKG || 0"
       />
     </template>
     <template v-if="gear?.millable">
       Restoration progress
       <v-slider
-        v-model="gear.millable.m_RestorationProgress"
+        v-model.number="gear.millable.m_RestorationProgress"
         :max="100"
         :min="0"
         hide-details
