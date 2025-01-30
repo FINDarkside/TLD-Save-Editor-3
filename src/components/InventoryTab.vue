@@ -84,7 +84,7 @@ import { ItemCategory } from 'src/tldSave/availableItems'
 const { t } = useI18n()
 
 const selectedItemToAdd = ref<typeof availableItems[number] & { displayName: string }>()
-const items = computed(() => store.currentSave?.data?.m_Dict?.global?.inventory?.items)
+const items = computed(() => store.currentSave?.data?.m_Dict?.global?.inventory?.items.sort((a, b) => getGearDisplayName(a.m_PrefabName).localeCompare(getGearDisplayName(b.m_PrefabName))))
 const selectedItem = ref(null as null | NonNullable<typeof items.value>[number])
 const selectedItemCategory = ref<ItemCategory>(ItemCategory.FirstAid)
 
