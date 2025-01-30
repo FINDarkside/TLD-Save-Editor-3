@@ -585,6 +585,15 @@
     "GEAR_WoolWrapCap": "Fleece Cowl",
     "GEAR_WorkBoots": "Work Boots",
     "GEAR_WorkGloves": "Work Gloves",
-    "GEAR_WorkPants": "Work Pants"
+    "GEAR_WorkPants": "Work Pants",
+    "GEAR_BunkerPapers1": "Wyatt's lost papers part 1",
+    "GEAR_BunkerPapers2": "Wyatt's lost papers part 2",
+    "GEAR_BunkerPapers3": "Wyatt's lost papers part 3",
+    "GEAR_BunkerSchematic_A": "Bunker Schematic Fragment 1",
+    "GEAR_BunkerSchematic_B": "Bunker Schematic Fragment 2",
+    "GEAR_BunkerSchematic_C": "Bunker Schematic Fragment 3",
+    "GEAR_HiddenWallCache1": "Document stash 1",
+    "GEAR_HiddenWallCache2": "Document stash 2",
+    "GEAR_HiddenWallCache3": "Document stash 3"
   }
 }

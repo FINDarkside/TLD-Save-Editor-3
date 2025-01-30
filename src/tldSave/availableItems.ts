@@ -192,6 +192,7 @@ const availableItems: ItemInfo[] = [
 
   // Food
   createFood('GEAR_Carrot', { stackable: { m_UnitsProxy: 1 } }),
+  createFood('GEAR_Potato', { stackable: { m_UnitsProxy: 1 } }),
   createFood('GEAR_AirlineFoodChick', { food: { m_CaloriesRemainingProxy: 620 } }),
   createFood('GEAR_AirlineFoodVeg', { food: { m_CaloriesRemainingProxy: 560 } }),
   createFood('GEAR_BeefJerky', { food: { m_CaloriesRemainingProxy: 350 } }),
@@ -686,7 +687,6 @@ const availableItems: ItemInfo[] = [
   createCollectible('GEAR_WaterTowerNote'),
 
   // Unknown
-  createUnknown('GEAR_Potato'),
   createUnknown('GEAR_AstridBackPack_hangar'),
   createUnknown('GEAR_FoodSupplies_hangar'),
   createUnknown('GEAR_ForestTalkerBloodyItem'),
@@ -698,6 +698,17 @@ const availableItems: ItemInfo[] = [
   createUnknown('GEAR_SurvivalSchoolWolfHunt'),
   createUnknown('GEAR_TechnicalBackpack'),
   createUnknown('GEAR_ForestTalkerBloodyItem'),
+
+  // Trader quest
+  createUnknown('GEAR_BunkerPapers1'),
+  createUnknown('GEAR_BunkerPapers2'),
+  createUnknown('GEAR_BunkerPapers3'),
+  createUnknown('GEAR_BunkerSchematic_A'),
+  createUnknown('GEAR_BunkerSchematic_B'),
+  createUnknown('GEAR_BunkerSchematic_C'),
+  createUnknown('GEAR_HiddenWallCache1'),
+  createUnknown('GEAR_HiddenWallCache2'),
+  createUnknown('GEAR_HiddenWallCache3')
 ];
 
 export default availableItems;
