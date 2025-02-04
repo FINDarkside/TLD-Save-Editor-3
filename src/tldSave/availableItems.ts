@@ -703,12 +703,15 @@ const availableItems: ItemInfo[] = [
   createUnknown('GEAR_BunkerPapers1'),
   createUnknown('GEAR_BunkerPapers2'),
   createUnknown('GEAR_BunkerPapers3'),
+  createUnknown('GEAR_BunkerPapers4'),
   createUnknown('GEAR_BunkerSchematic_A'),
   createUnknown('GEAR_BunkerSchematic_B'),
   createUnknown('GEAR_BunkerSchematic_C'),
   createUnknown('GEAR_HiddenWallCache1'),
   createUnknown('GEAR_HiddenWallCache2'),
-  createUnknown('GEAR_HiddenWallCache3')
+  createUnknown('GEAR_HiddenWallCache3'),
+  createUnknown('GEAR_TraderWyattBonesNote'),
+  createUnknown('GEAR_HatchWheel')
 ];
 
 export default availableItems;
