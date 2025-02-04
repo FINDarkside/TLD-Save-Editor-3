@@ -589,11 +589,14 @@
     "GEAR_BunkerPapers1": "Wyatt's lost papers part 1",
     "GEAR_BunkerPapers2": "Wyatt's lost papers part 2",
     "GEAR_BunkerPapers3": "Wyatt's lost papers part 3",
+    "GEAR_BunkerPapers4": "Sutherland's Note",
     "GEAR_BunkerSchematic_A": "Bunker Schematic Fragment 1",
     "GEAR_BunkerSchematic_B": "Bunker Schematic Fragment 2",
     "GEAR_BunkerSchematic_C": "Bunker Schematic Fragment 3",
     "GEAR_HiddenWallCache1": "Document stash 1",
     "GEAR_HiddenWallCache2": "Document stash 2",
-    "GEAR_HiddenWallCache3": "Document stash 3"
+    "GEAR_HiddenWallCache3": "Document stash 3",
+    "GEAR_TraderWyattBonesNote": "A skeleton and note",
+    "GEAR_HatchWheel": "Broken Hatch Wheel"
   }
 }
